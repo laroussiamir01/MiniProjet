@@ -19,7 +19,7 @@ import java.util.Set;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/etudiant")
+@RequestMapping("/api/v1/etu")
 @CrossOrigin("*")
 public class EtudiantController {
     EtudiantserviceImpl etudiantService;
@@ -47,7 +47,7 @@ public class EtudiantController {
     Etudiant retrieveEtudiant(@PathVariable Long id) {
         return etudiantService.getEtudiant(id);
     }
-    @GetMapping("/etudiants")
+    @GetMapping("/Admin/etudiants")
     List<Etudiant> retrieveEtudiants(){
         return etudiantService.getAllEtudiants();
     }

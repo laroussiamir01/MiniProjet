@@ -1,0 +1,84 @@
+
+<div class="table-container">
+  <h1>liste des questions</h1>
+  <table>
+    <thead>
+    <tr>
+    <!--  <th>id</th> -->
+      <th>Les questions</th>
+      <th>date</th>
+      <th>Reponses</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let qst of questions">
+
+     <!-- <td>{{ qst.idQuestion }}</td> -->
+
+      <td>{{ qst.descriptionQuestion }}</td>
+      {{ formatDateString(qst.dateAjoutQ) }}
+      <td>{{ qst.reponses?.length || "aucune reponse" }}</td>
+      <td> <button (click)="DetailQuestion(qst.idQuestion)" > Repondre</button></td>
+      <td> <button (click)="deleteQuestion(qst)" > Supprimer</button></td>
+      <td> <button (click)="updateQuestion(qst.idQuestion)" > Modifier</button></td>
+
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <button routerLink="/dashboard/lazy/question/addQst">Add Question</button>
+</div>
+
+
+<style>
+
+
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrer verticalement */
+    align-items: center; /* Centrer horizontalement */
+    height: 100vh; /* Pour centrer dans la hauteur de la fenêtre */
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 80%; /* Ajustez la largeur du tableau selon vos besoins */
+  }
+
+  /* Styles supplémentaires si nécessaire */
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+
+  /* Styles pour les boutons si nécessaire */
+  table button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  table button:hover {
+    background-color: #0056b3;
+  }
+  /* styles.css (ou votre fichier CSS dédié) */
+
+  .calculate-button {
+    background-color: #FF5733; /* Couleur de fond personnalisée */
+    color: #fff; /* Couleur du texte */
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .calculate-button:hover {
+    background-color: #E5472A; /* Couleur de fond au survol */
+  }
+
+
+</style>

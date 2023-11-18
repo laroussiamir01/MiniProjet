@@ -1,0 +1,9 @@
+<form #editForm="ngForm">
+  <div class="form-group">
+    <label for="editedDescription">Nouvelle description</label>
+    <input type="text" id="editedDescription" [(ngModel)]="editedDescription" name="editedDescription" class="form-control" ngModel [ngModelOptions]="{ standalone: true }">
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="saveChanges()">Enregistrer</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+</form>

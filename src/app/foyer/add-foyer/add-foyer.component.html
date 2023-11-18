@@ -1,0 +1,19 @@
+
+<div class="container">
+    <h2>Ajouter un Foyer</h2>
+    <form [formGroup]="addFoyerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nomFoyer">nom</label>
+        <input type="text" id="nomFoyer" formControlName="nomFoyer" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="capaciteFoyer">capacite</label>
+        <input type="text" id="capaciteFoyer" formControlName="capaciteFoyer" class="form-control">
+      </div>
+    
+   
+    
+
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  </div>

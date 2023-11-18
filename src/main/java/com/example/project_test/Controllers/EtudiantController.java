@@ -4,7 +4,11 @@ package com.example.project_test.Controllers;
 import com.example.project_test.Entities.Etudiant;
 import com.example.project_test.Entities.Evenement;
 import com.example.project_test.Service.EtudiantserviceImpl;
+//import com.example.project_test.auth.AuthenticationRequest;
+//import com.example.project_test.auth.AuthenticationResponse;
+//import com.example.project_test.auth.RegisterRequest;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +19,25 @@ import java.util.Set;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/v1/etudiant")
 @CrossOrigin("*")
 public class EtudiantController {
     EtudiantserviceImpl etudiantService;
+
+
+//    @PostMapping("register")
+//    public ResponseEntity<AuthenticationResponse> register(
+//            @RequestBody RegisterRequest request
+//    ) {
+//        //
+//    }
+//    @PostMapping("/authenticate")
+//    public ResponseEntity<AuthenticationResponse> register(
+//            @RequestBody AuthenticationRequest request
+//    ) {
+//        //
+//    }
+
     @PostMapping("/addEtudiant")
     Etudiant addetudiant(@RequestBody com.example.project_test.Entities.Etudiant etudiant) {
         return etudiantService.addEtudiant(etudiant);

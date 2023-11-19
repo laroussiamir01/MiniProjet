@@ -32,4 +32,7 @@ export class QuestionService {
     const url = this.questionUrl + '/question/' + question.idQuestion;
     return this.http.delete<Question>(url);
   }
+  searchQuestions(descriptionQuestion: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.questionUrl}/questions/search?descriptionQuestion=${descriptionQuestion}`);
+  }
 }

@@ -1,6 +1,11 @@
 
 <div class="table-container">
   <h1>liste des questions</h1>
+  <div>
+    <input type="text" [(ngModel)]="descriptionSearch" (ngModelChange)="searchQuestions()" />
+
+  </div>
+
   <table>
     <thead>
     <tr>

@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'question',
 
     children: [
-      { path: '', component: ListeQuestionComponent , resolve: { questions: ResolverQuestionService } },
+      { path: '', component: ListeQuestionComponent  },
       { path: 'addQst', component: AddQuestionComponent },
       { path: 'detailQst/:idQuestion', component: DetailQuestionComponent },
       { path: 'deleteQst/:idQuestion', component: DeleteQuestionComponent },

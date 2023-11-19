@@ -35,4 +35,9 @@ public class QuestionController {
     Question updateFoyer(@RequestBody Question question){
         return questionService.updateQuestion(question);
     }
+
+    @GetMapping("/questions/search")
+    public List<Question> searchQuestions(@RequestParam String descriptionQuestion) {
+        return questionService.searchQuestionsByDescription(descriptionQuestion);
+    }
 }

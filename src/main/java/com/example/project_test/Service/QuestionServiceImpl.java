@@ -44,4 +44,10 @@ questionRepository.deleteById(idQuestion);
             questionRepository.save(question);}
         return f;
     }
+
+    @Override
+    public List<Question> searchQuestionsByDescription(String description) {
+        return questionRepository.findByDescriptionQuestionContainingIgnoreCase(description);
+    }
+
 }

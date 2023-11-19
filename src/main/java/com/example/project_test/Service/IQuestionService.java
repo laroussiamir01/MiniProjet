@@ -10,4 +10,6 @@ public interface IQuestionService {
     List<Question> getAllQuestions();
     void deleteQuestion(long idQuestion);
     Question updateQuestion(Question question);
+     List<Question> searchQuestionsByDescription(String description) ;
+
 }

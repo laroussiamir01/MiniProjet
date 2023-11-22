@@ -1,0 +1,103 @@
+
+<div class="table-container">
+  <h1>liste d'evenements</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>titre</th>
+      <th>description</th>
+      <th>dateDebut</th>
+      <th>dateFin</th>
+      <th>today</th>
+      <th>place Disponible</th>
+      <th>Participated</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let evenement of evenements">
+
+      <td>{{ evenement.titre }}</td>
+      <td>{{ evenement.description  }}</td>
+      <td>{{ evenement.dateDebut  }}</td>
+      <td>{{ evenement.dateFin  }}</td>
+      <td>{{ this.today | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ evenement.placeDisponible  }}</td>
+      <td>{{ evenement.hasParticipated  }}</td>
+<!--      <td>{{ evenement.dateFin >= (this.today | date: 'yyyy-MM-dd')  }}</td>-->
+<!--      <td>{{ evenement.dateFin?.toString() >= this.today?.toString() }}</td>-->
+<!--      <td>{{ this.today.toDateString()  }}</td>-->
+<!--      <td>{{evenement.dateFin.toDateString() == this.today.toDateString()  }}</td>-->
+
+
+      <td> <button (click)="deleteEvenemnt(evenement)"> Supprimer</button></td>
+      <td> <button (click)="showForm(evenement)"> Modifier</button></td>
+<!--      <td> <button (click)="affecterEvenementToEtudiant(8,evenement.idEvenement)" [disabled]="evenement.placeDisponible==0"> Participer</button></td>-->
+      <td> <input class="btn btn-primary" type="submit" value="Participer" (click)="affecterEvenementToEtudiant(8,evenement.idEvenement)" [disabled]="evenement.placeDisponible==0" ></td>
+      <td> <input class="btn btn-secondary" type="submit" value="Annuler Participation" (click)="desaffecterEtudiant(8,evenement.idEvenement)" [disabled]="!evenement.hasParticipated"></td>
+<!--      [disabled]="this.etudiantDejaParticipe(8,evenement.idEvenement)-->
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="Showupdate">
+    <app-update-evenement [eve]="evenementtoupdate" (sendmsg)="afterrecieveData($event)"></app-update-evenement>
+  </div>
+  <br>
+  <button class="btn btn-secondary" routerLink="/dashboard/lazy/evenement/addEvenement"> Ajouter Evenement</button>
+</div>
+
+
+<style>
+
+
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrer verticalement */
+    align-items: center; /* Centrer horizontalement */
+    height: 100vh; /* Pour centrer dans la hauteur de la fenêtre */
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 80%; /* Ajustez la largeur du tableau selon vos besoins */
+  }
+
+  /* Styles supplémentaires si nécessaire */
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+
+  /* Styles pour les boutons si nécessaire */
+  table button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  table button:hover {
+    background-color: #0056b3;
+  }
+  /* styles.css (ou votre fichier CSS dédié) */
+
+  .calculate-button {
+    background-color: #FF5733; /* Couleur de fond personnalisée */
+    color: #fff; /* Couleur du texte */
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .calculate-button:hover {
+    background-color: #E5472A; /* Couleur de fond au survol */
+  }
+
+
+
+</style>
+
+

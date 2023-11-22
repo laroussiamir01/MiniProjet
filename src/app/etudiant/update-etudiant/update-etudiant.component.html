@@ -1,0 +1,42 @@
+<form (ngSubmit)="sendDataToParent()">
+  <div class="form-group">
+    <label for="idEtudiant">ID</label>
+    <div class="form-group">
+      <input type="text" id="idEtudiant" name="idEtudiant" [(ngModel)]="etu.idEtudiant" [disabled]="true" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nomEt">Nom</label>
+    <div class="form-group">
+      <input type="text" id="nomEt" name="nomEt" [(ngModel)]="etu.nomEt"  class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="prenomEt">Prenom</label>
+    <div class="form-group">
+      <input type="text" id="prenomEt" name="prenomEt" [(ngModel)]="etu.prenomEt"  class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cin">cin</label>
+    <div class="form-group">
+      <input type="number" id="cin" name="cin" [(ngModel)]="etu.cin"  class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ecole">ecole</label>
+    <div class="form-group">
+      <input type="text" id="ecole" name="ecole" [(ngModel)]="etu.ecole"  class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dateNaissance">date Naissance:</label>
+    <input type="date" id="dateNaissance" name="dateNaissance" [(ngModel)]="etu.dateNaissance" class="form-control">
+
+    <button type="submit" > save</button>
+
+  </div>
+</form>

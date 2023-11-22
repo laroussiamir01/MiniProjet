@@ -5,12 +5,14 @@ import com.example.project_test.Entities.Evenement;
 import com.example.project_test.repository.EtudiantRepository;
 import com.example.project_test.repository.EvenementRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -82,15 +84,24 @@ public class EvenementserviceImlpl implements IEvenementService{
     public List<Evenement> findByEtudiantsIdEtudiant(long idEtudiant) {
         return evenementRepository.findByEtudiantsIdEtudiant(idEtudiant);
     }
+
+
+    @Transactional
     @Scheduled(fixedRate = 120000)
-  // @Scheduled(cron = "0 0 * * * *")
     @Override
     public void deleteExpiredEvents() {
         Date currentDate = new Date();
-      // Evenement evenement=evenementRepository.deleteExpiredEvents(currentDate);
-        List<Evenement> evenements=evenementRepository.findByDateFinBefore(currentDate);
+        List<Evenement> evenements = evenementRepository.findByDateFinBefore(currentDate);
 
-        for (Evenement evenement:evenements ) {
+        for (Evenement evenement : evenements) {
+            Set<Etudiant> etudiants = evenement.getEtudiants();
+
+            for (Etudiant etudiant : etudiants) {
+                etudiant.getEvenements().remove(evenement);
+            }
+
+            evenement.getEtudiants().clear();
+            evenementRepository.save(evenement);
             evenementRepository.deleteById(evenement.getIdEvenement());
         }
     }

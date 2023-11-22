@@ -38,19 +38,16 @@ public class EtudiantController {
 //        //
 //    }
 
-    @PostMapping("/addEtudiant")
-    Etudiant addetudiant(@RequestBody com.example.project_test.Entities.Etudiant etudiant) {
-        return etudiantService.addEtudiant(etudiant);
-    }
+
 
     @GetMapping("/etudiant/{id}")
     Etudiant retrieveEtudiant(@PathVariable Long id) {
         return etudiantService.getEtudiant(id);
     }
-    @GetMapping("/Admin/etudiants")
-    List<Etudiant> retrieveEtudiants(){
-        return etudiantService.getAllEtudiants();
-    }
+//    @GetMapping("/Admin/etudiants")
+//    List<Etudiant> retrieveEtudiants(){
+//        return etudiantService.getAllEtudiants();
+//    }
     @GetMapping("/etudiantParNom/{nom}")
     public List<Etudiant> getEtudiantParNom(@PathVariable String nom){
         return etudiantService.getEtudiantParNom(nom);

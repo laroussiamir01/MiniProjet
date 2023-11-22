@@ -1,6 +1,8 @@
 package com.example.project_test.Entities;
 
+import com.example.project_test.token.Token;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,10 +39,14 @@ public class Etudiant implements Serializable, UserDetails {
     @ManyToMany
     @Column(nullable = false)
     private Set<Evenement> evenements= new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+      //  return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

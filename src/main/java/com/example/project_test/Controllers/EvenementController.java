@@ -18,19 +18,19 @@ import java.util.List;
 public class EvenementController {
     EvenementserviceImlpl evenementservice;
 
-    @PostMapping("/addEvenement")
-    Evenement addEvenement(@RequestBody com.example.project_test.Entities.Evenement evenement) {
-        return evenementservice.addEvenement(evenement);
-    }
+//    @PostMapping("/addEvenement")
+//    Evenement addEvenement(@RequestBody com.example.project_test.Entities.Evenement evenement) {
+//        return evenementservice.addEvenement(evenement);
+//    }
 
     @GetMapping("/evenement/{id}")
     Evenement retrieveEvenement(@PathVariable Long id) {
         return evenementservice.getEvenement(id);
     }
-    @GetMapping("/evenements")
-    List<Evenement> retrieveEvenements(){
-        return evenementservice.getAllEvenements();
-    }
+//    @GetMapping("/evenements")
+//    List<Evenement> retrieveEvenements(){
+//        return evenementservice.getAllEvenements();
+//    }
     @GetMapping("/evenementBefore/{endDate}")
     public List<Evenement> findByDateFinBefore(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         return evenementservice.findByDateFinBefore(endDate);

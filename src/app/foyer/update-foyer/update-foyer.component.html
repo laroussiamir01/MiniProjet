@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>Modifier un foyer</h2>
+    <form (ngSubmit)="update()">
+      <div class="form-group">
+        <label for="nomFoyer">nomFoyer</label>
+        <input type="text" id="nomFoyer" name="nomFoyer" [(ngModel)]="foyer.nomFoyer"  class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="capaciteFoyer">capacité</label>
+        <input type="text" id="capaciteFoyer" name="capaciteFoyer" [(ngModel)]="foyer.capaciteFoyer" class="form-control">
+      </div>
+     
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+     
+     </form>
+</div> 
+
+  

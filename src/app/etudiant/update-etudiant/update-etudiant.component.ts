@@ -23,7 +23,7 @@ export class UpdateEtudiantComponent implements OnInit{
    this.etudiant.idEtudiant = this.ac.snapshot.params['idEtudiant'];
   this.etudiantService.getEtudiantById(this.etu.idEtudiant).subscribe(data=>{
   this.etudiant;})
-   this.http.get<any>(`http://localhost:8082/etudiant/${this.etu.idEtudiant}`).subscribe(response => {
+   this.http.get<any>(`http://localhost:8082/api/v1/etu/etudiant/${this.etu.idEtudiant}`).subscribe(response => {
      this.etudiant = response;
    });
    }
@@ -49,10 +49,12 @@ export class UpdateEtudiantComponent implements OnInit{
 
   sendDataToParent(){
     this.sendmsg.emit('bonjour');
+    // this.etudiantService.updateEtudiant(this.etu.idEtudiant,this.etu).subscribe((data)=>{
+    //   this.getAll();
+    // });
     this.etudiantService.updateEtudiant(this.etu.idEtudiant,this.etu).subscribe((data)=>{
-    //  this.getAll();
     });
-    console.log(this.etudiant);
+    console.log(this.etu);
   }
 
   getAll(){

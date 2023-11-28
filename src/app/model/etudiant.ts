@@ -6,6 +6,10 @@ export class Etudiant{
     prenomEt!: string;
     cin!: number;
     ecole!: string;
+  email!: string;
+  password!: string;
     dateNaissance!: Date;
+  role!: string;
+  mfaEnabled!: boolean;
  public evenements!: Evenement;
     }

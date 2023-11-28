@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EtudiantService } from './services/serviceEtudiant/etudiant.service';
 import { AddFoyerComponent } from './foyer/add-foyer/add-foyer.component';
@@ -21,6 +21,13 @@ import { DeleteUniversiteComponent } from './universite/delete-universite/delete
 import { DetailUniversiteComponent } from './universite/detail-universite/detail-universite.component';
 import {EvenementService} from "./services/serviceEvenement/evenement.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardEtudiantComponent } from './dashboard-etudiant/dashboard-etudiant.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import {AuthInterceptor} from "./services/auth/auth.interceptor";
+import {AuthenticationService} from "./services/login/authentication.service";
+import {AuthGuard} from "./services/auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -41,6 +48,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DeleteUniversiteComponent,
     DetailUniversiteComponent,
     DashboardComponent,
+    DashboardEtudiantComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +60,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [EtudiantService,EvenementService],
+  providers: [EtudiantService,EvenementService,HttpClient,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    },
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

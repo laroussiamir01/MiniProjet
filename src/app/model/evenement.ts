@@ -7,6 +7,5 @@ export class Evenement{
   dateFin!: Date;
   placeDisponible!:number;
   hasParticipated!:boolean;
- // isAffectationEnCours!:boolean;
   etudiants!: Etudiant ;
 }

@@ -1,10 +1,10 @@
 <form (ngSubmit)="sendDataToParent()">
-  <div class="form-group">
-    <label for="idEtudiant">ID</label>
-    <div class="form-group">
-      <input type="text" id="idEtudiant" name="idEtudiant" [(ngModel)]="etu.idEtudiant" [disabled]="true" class="form-control">
-    </div>
-  </div>
+<!--  <div class="form-group">-->
+<!--    <label for="idEtudiant">ID</label>-->
+<!--    <div class="form-group">-->
+<!--      <input type="text" id="idEtudiant" name="idEtudiant" [(ngModel)]="etu.idEtudiant" [disabled]="true" class="form-control">-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="form-group">
     <label for="nomEt">Nom</label>
     <div class="form-group">
@@ -31,6 +31,12 @@
       <input type="text" id="ecole" name="ecole" [(ngModel)]="etu.ecole"  class="form-control">
     </div>
   </div>
+  <div class="form-group">
+    <label for="role">role</label>
+    <div class="form-group">
+      <input type="text" id="role" name="role" [(ngModel)]="etu.role"  class="form-control">
+    </div>
+  </div>
 
   <div class="form-group">
     <label for="dateNaissance">date Naissance:</label>
@@ -39,4 +45,5 @@
     <button type="submit" > save</button>
 
   </div>
+
 </form>

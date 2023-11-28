@@ -5,9 +5,16 @@ import {DeleteEtudiantComponent} from "./delete-etudiant/delete-etudiant.compone
 import {UpdateEtudiantComponent} from "./update-etudiant/update-etudiant.component";
 import {AddEtudiantComponent} from "./add-etudiant/add-etudiant.component";
 
+
 const routes: Routes = [
   {path:'etudiant', children:[
-      {path:'',component:ListeEtudiantComponent},
+      {
+        path:'',component:ListeEtudiantComponent,
+        data: {
+          authorities: ['ROLE_ADMIN','ROLE_USER'],
+          pageTitle: 'CNI 23'
+        }
+      },
       { path: 'addEtudiant', component: AddEtudiantComponent },
      // {path:'detail/:id',component:DetailComponent},
     //  {path:'detail/:attribute/:attributeVal',component:ShowUserComponent},

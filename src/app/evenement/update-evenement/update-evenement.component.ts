@@ -24,7 +24,7 @@ export class UpdateEvenementComponent implements OnInit {
     this.evenement.idEvenement = this.ac.snapshot.params['idEvenement'];
     this.evenementService.getEvenementById(this.eve.idEvenement).subscribe(data=>{
       this.evenement;})
-    this.http.get<any>(`http://localhost:8082/evenement/${this.eve.idEvenement}`).subscribe(response => {
+    this.http.get<any>(`http://localhost:8082/api/v1/eve/evenement/${this.eve.idEvenement}`).subscribe(response => {
       this.evenement = response;
     });
   }

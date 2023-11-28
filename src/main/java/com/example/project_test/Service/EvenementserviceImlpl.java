@@ -38,7 +38,17 @@ public class EvenementserviceImlpl implements IEvenementService{
 
     @Override
     public void deleteEvenement(long idEvenement) {
-        evenementRepository.deleteById(idEvenement);
+        Evenement evenement = evenementRepository.findById(idEvenement).orElse(null);
+            Set<Etudiant> etudiants = evenement.getEtudiants();
+
+            for (Etudiant etudiant : etudiants) {
+                etudiant.getEvenements().remove(evenement);
+            }
+
+            evenement.getEtudiants().clear();
+            evenementRepository.save(evenement);
+            evenementRepository.deleteById(evenement.getIdEvenement());
+
     }
 
     @Override
@@ -87,7 +97,9 @@ public class EvenementserviceImlpl implements IEvenementService{
 
 
     @Transactional
-    @Scheduled(fixedRate = 120000)
+    @Scheduled(fixedRate = 12000000)
+    //fixedDelay
+    //cron
     @Override
     public void deleteExpiredEvents() {
         Date currentDate = new Date();

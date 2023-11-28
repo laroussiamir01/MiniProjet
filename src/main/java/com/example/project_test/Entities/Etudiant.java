@@ -26,8 +26,11 @@ public class Etudiant implements Serializable, UserDetails {
     private String prenomEt;
     private long cin;
     private String ecole;
+    @Column(unique = true)
     private String email;
     private String password;
+    private boolean mfaEnabled;
+    private String secret;
     @Enumerated(EnumType.STRING)
     private Role role;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -48,6 +51,9 @@ public class Etudiant implements Serializable, UserDetails {
       //  return List.of(new SimpleGrantedAuthority(role.name()));
         return role.getAuthorities();
     }
+
+
+
 
     @Override
     public String getPassword() {

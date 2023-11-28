@@ -6,6 +6,7 @@ import com.example.project_test.Service.EtudiantserviceImpl;
 import com.example.project_test.Service.EvenementserviceImlpl;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/v1/eve")
 @CrossOrigin("*")
 public class EvenementController {
     EvenementserviceImlpl evenementservice;
@@ -62,6 +64,8 @@ public class EvenementController {
 
 
     @DeleteMapping("/deleteEvenement/{id}")
+    @PreAuthorize("hasAuthority('admin:delete')")
+
     void deleteEvenement(@PathVariable Long id){
         evenementservice.deleteEvenement(id);
     }
@@ -71,6 +75,7 @@ public class EvenementController {
 //    }
 
     @PutMapping("/updateEvenement/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public Evenement updateEvenement(@PathVariable("id") Long id, @RequestBody Evenement evenement) {
         evenement.setIdEvenement(id); // Définir l'ID de l'étudiant à partir du chemin d'accès
         return evenementservice.updateEvenement(evenement);

@@ -16,7 +16,8 @@ public enum Role {
             USER_READ,
             USER_DELETE,
             USER_UPDATE,
-            USER_CREATE
+            USER_CREATE,
+            USER_PATCH
 
 
     )),
@@ -28,8 +29,9 @@ public enum Role {
             USER_READ,
             USER_DELETE,
             USER_UPDATE,
-            USER_CREATE
-
+            USER_CREATE,
+            ADMIN_PATCH,
+            USER_PATCH
 
            )
     )

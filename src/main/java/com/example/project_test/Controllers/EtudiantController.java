@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.Set;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/etu")
+//@PreAuthorize("hasRole('ADMIN')")
 @CrossOrigin("*")
 public class EtudiantController {
     EtudiantserviceImpl etudiantService;
@@ -41,6 +43,7 @@ public class EtudiantController {
 
 
     @GetMapping("/etudiant/{id}")
+
     Etudiant retrieveEtudiant(@PathVariable Long id) {
         return etudiantService.getEtudiant(id);
     }
@@ -102,6 +105,13 @@ public class EtudiantController {
     public Etudiant updateEtudiant(@PathVariable("id") Long id, @RequestBody Etudiant etudiant) {
         etudiant.setIdEtudiant(id); // Définir l'ID de l'étudiant à partir du chemin d'accès
         return etudiantService.updateEtudiant(etudiant);
+    }
+    @PatchMapping("/updateEtudiant1/{id}")
+    @PreAuthorize("hasAuthority('user:patch')")
+    public Etudiant updateEtudiant1(@PathVariable("id") Long id, @RequestBody Etudiant etudiant) {
+        etudiant.setIdEtudiant(id);
+       return etudiantService.updateEtudiant1(etudiant);
+
     }
     @PutMapping("/setEvenementToEtudiant/{idEtudiant}/{idEvenement}")
     public Etudiant affecterEvenementToEtudiant(@PathVariable long idEtudiant,@PathVariable long idEvenement){

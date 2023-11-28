@@ -13,38 +13,17 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/admin")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 @CrossOrigin("*")
 public class AdminController {
     EtudiantserviceImpl etudiantService;
     EvenementserviceImlpl evenementservice;
-    @GetMapping
-    @PreAuthorize("hasAuthority('admin:read')")
-    public String get(){
-        return "GET:: admin controller";
-    }
-    @PostMapping
-    @PreAuthorize("hasAuthority('admin:create')")
-    public String post(){
-        return "POST:: admin controller";
-    }
-    @PutMapping
-    @PreAuthorize("hasAuthority('admin:update')")
-    public String put(){
-        return "PUT:: admin controller";
-    }
-    @DeleteMapping
-    @PreAuthorize("hasAuthority('admin:delete')")
-    public String delete(){
-        return "DELETE:: admin controller";
-    }
 
-
-    @PostMapping("/addEtudiant")
-    @PreAuthorize("hasAuthority('admin:create')")
-    Etudiant addetudiant(@RequestBody com.example.project_test.Entities.Etudiant etudiant) {
-        return etudiantService.addEtudiant(etudiant);
-    }
+//    @PostMapping("/addEtudiant")
+//    @PreAuthorize("hasAuthority('admin:create')")
+//    Etudiant addetudiant(@RequestBody com.example.project_test.Entities.Etudiant etudiant) {
+//        return etudiantService.addEtudiant(etudiant);
+//    }
 
     @GetMapping("/etudiants")
     @PreAuthorize("hasAuthority('admin:read')")
@@ -59,7 +38,7 @@ public class AdminController {
     }
 
     @GetMapping("/evenements")
-    @PreAuthorize("hasAuthority('admin:read')")
+    @PreAuthorize("hasAuthority('user:read')")
     List<Evenement> retrieveEvenements(){
         return evenementservice.getAllEvenements();
     }

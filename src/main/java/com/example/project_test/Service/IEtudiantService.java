@@ -14,6 +14,7 @@ public interface IEtudiantService {
     List<Etudiant> getAllEtudiants();
     void deleteEtudiant(long idEtudiant);
     Etudiant updateEtudiant(Etudiant etudiant);
+    public Etudiant updateEtudiant1(Etudiant etudiant);
     Etudiant affecterReservationToEtudiant(long idEtudiant,String idReservation);
     Etudiant affecterEvenementToEtudiant(long idEtudiant,long idEvenement);
     Etudiant affecterEvenementToEtudiantByTitre(long idEtudiant,String titre);

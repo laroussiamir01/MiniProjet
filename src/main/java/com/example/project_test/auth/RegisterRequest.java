@@ -21,4 +21,5 @@ public class RegisterRequest {
     private String ecole;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
+    private boolean mfaEnabled;
 }

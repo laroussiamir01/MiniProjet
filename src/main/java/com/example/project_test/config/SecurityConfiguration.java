@@ -37,20 +37,27 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                               .requestMatchers("/api/v1/etu/Admin/**").hasAnyAuthority(ADMIN.name())
+                           //    .requestMatchers("/api/v1/etu/Admin/**").hasAnyAuthority(ADMIN.name())
 
-                                .requestMatchers("/api/v1/user/**").hasAnyRole(ADMIN.name(),USER.name())
-                                .requestMatchers(GET, "/api/v1/user/**").hasAnyAuthority(ADMIN_READ.name(),USER_READ.name())
-                                .requestMatchers(POST, "/api/v1/user/**").hasAnyAuthority(ADMIN_CREATE.name(),USER_CREATE.name())
-                                .requestMatchers(PUT, "/api/v1/user/**").hasAnyAuthority(ADMIN_UPDATE.name(),USER_UPDATE.name())
-                                .requestMatchers(DELETE, "/api/v1/user/**").hasAnyAuthority(ADMIN_DELETE.name(),USER_DELETE.name())
-
-//                                .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
-//                                .requestMatchers(GET, "/api/v1/admin/**").hasAuthority(ADMIN_READ.name())
+//                                .requestMatchers("/api/v1/user/**").hasAnyRole(ADMIN.name())
+//                                .requestMatchers("/api/v1/admin/evenements").hasAnyRole(ADMIN.name(),USER.name())
+//                             //   .requestMatchers("/api/v1/admin/addEvenement").hasRole(ADMIN.name())
+//                                .requestMatchers(GET, "/api/v1/user/**").hasAnyAuthority(ADMIN_READ.name(),USER_READ.name())
+//                                .requestMatchers(POST, "/api/v1/user/**").hasAnyAuthority(ADMIN_CREATE.name(),USER_CREATE.name())
+//                                .requestMatchers(PUT, "/api/v1/user/**").hasAnyAuthority(ADMIN_UPDATE.name(),USER_UPDATE.name())
+//                                .requestMatchers(PATCH, "/api/v1/user/**").hasAnyAuthority(ADMIN_PATCH.name())
+//                                .requestMatchers(DELETE, "/api/v1/user/**").hasAnyAuthority(ADMIN_DELETE.name(),USER_DELETE.name())
+//
+//
+//
+//                            //    .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
+//                          //      .requestMatchers(GET, "/api/v1/admin/evenements").hasAnyAuthority(ADMIN.name(),USER.name())
 //                                .requestMatchers(POST, "/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
 //                                .requestMatchers(PUT, "/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
 //                                .requestMatchers(DELETE, "/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())

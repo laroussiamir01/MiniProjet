@@ -55,6 +55,30 @@ public class EtudiantserviceImpl implements IEtudiantService{
     }
 
     @Override
+    public Etudiant updateEtudiant1(Etudiant etudiant) {
+        Etudiant etudiant1 = etudiantRepository.findById(etudiant.getIdEtudiant())
+                .orElseThrow(() -> new EntityNotFoundException("No Etudiant with id " + etudiant.getIdEtudiant() + " was found!"));
+
+        if (etudiant1 != null) {
+            // Mettre à jour les attributs spécifiques
+            if (etudiant.getEmail() != null) {
+                etudiant1.setEmail(etudiant.getEmail());
+            }
+            if (etudiant.getNomEt() != null) {
+                etudiant1.setNomEt(etudiant.getNomEt());
+            }
+            if (etudiant.getPrenomEt() != null) {
+                etudiant1.setPrenomEt(etudiant.getPrenomEt());
+            }
+            // Ajoutez d'autres attributs que vous souhaitez mettre à jour
+
+            etudiantRepository.save(etudiant1);
+        }
+
+        return etudiant1;
+    }
+
+    @Override
     public Etudiant affecterReservationToEtudiant(long idEtudiant, String idReservation) {
         Etudiant etudiant=etudiantRepository.findById(idEtudiant).orElse(null);
         Reservation reservation= reservationRepository.findById(idReservation).orElse(null);

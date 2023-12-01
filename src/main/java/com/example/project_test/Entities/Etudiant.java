@@ -1,8 +1,11 @@
 package com.example.project_test.Entities;
 
+import com.example.project_test.EtudiantDeserializer;
+import com.example.project_test.customauthoritydeserializer;
 import com.example.project_test.token.Token;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +21,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonDeserialize(using = EtudiantDeserializer.class)
 public class Etudiant implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +49,7 @@ public class Etudiant implements Serializable, UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -54,8 +54,8 @@ public class AuthenticationService {
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .secretImageUri(tfaService.generateQrCodeImageUri(user.getSecret()))
-                .accessToken("")
-                .refreshToken("")
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
                 .mfaEnabled(user.isMfaEnabled())
                 .build();
 

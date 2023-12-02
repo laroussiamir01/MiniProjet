@@ -4,6 +4,9 @@ import com.example.project_test.Entities.Etudiant;
 import com.example.project_test.Entities.Evenement;
 import com.example.project_test.repository.EtudiantRepository;
 import com.example.project_test.repository.EvenementRepository;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 
@@ -23,7 +27,13 @@ public class EvenementserviceImlpl implements IEvenementService{
 
     @Override
     public Evenement addEvenement(Evenement evenement) {
-        return evenementRepository.save(evenement);
+
+        Evenement savedEvenement = evenementRepository.save(evenement);
+        List<Etudiant> etudiants = etudiantRepository.findAll();
+        sendEmailToEtudiant(etudiants, savedEvenement);
+
+        return savedEvenement;
+
     }
 
     @Override
@@ -119,9 +129,73 @@ public class EvenementserviceImlpl implements IEvenementService{
     }
 
 
+    public void sendEmailToEtudiant(List<Etudiant>etudiants, Evenement evenement) {
+        // Sender's email information
+        String senderEmail = "amir.laroussi@esprit.tn";
+        String senderPassword = "aney avyr jedz ogti";
 
-//    @Override
-//    public Evenement affecterEtudiantToEvenement(long idEtudiant, long idEvenement) {
-//        return null;
-//    }
+
+
+        // Email subject
+        String subject = "New Event Added";
+
+        // Email body
+        String body = "A new event has been added get ready:\n\n" +
+                "Event Title: " + evenement.getTitre() + "\n" +
+                "Event Description: " + evenement.getDescription() + "\n" +
+                "Event Starting Date : " + evenement.getDateDebut() + "\n" +
+                "Event Ending Date: " + evenement.getDateFin() + "\n" +
+                "Event Space Available: " + evenement.getPlaceDisponible() + "\n";
+
+        // SMTP server configuration
+        String host = "smtp.gmail.com";
+        int port = 587;
+
+        // Create properties object for the SMTP server
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Create a session with the SMTP server
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+        try {
+            for (Etudiant etudiant : etudiants) {
+                // Create a MimeMessage object for each student
+                MimeMessage message = new MimeMessage(session);
+
+                // Set the sender address
+                message.setFrom(new InternetAddress(senderEmail));
+
+                // Set the recipient address
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(etudiant.getEmail()));
+
+                // Set the subject
+                message.setSubject(subject);
+
+                // Set the body
+                message.setText(body);
+
+                // Send the email
+                Transport.send(message);
+
+                System.out.println("Email sent successfully to: " + etudiant.getEmail());
+            }
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
 }

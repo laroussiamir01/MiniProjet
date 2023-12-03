@@ -23,18 +23,19 @@
       <td>{{ evenement.dateFin  }}</td>
       <td>{{ this.today | date: 'yyyy-MM-dd' }}</td>
       <td>{{ evenement.placeDisponible  }}</td>
-      <td>{{ evenement.hasParticipated  }}</td>
+      <td>{{evenement.hasParticipated}}</td>
+<!--      <td>{{ existeDeja(localStorage.getItem('id'),evenement.idEvenement)  }}</td>-->
 <!--      <td>{{ evenement.dateFin >= (this.today | date: 'yyyy-MM-dd')  }}</td>-->
 <!--      <td>{{ evenement.dateFin?.toString() >= this.today?.toString() }}</td>-->
 <!--      <td>{{ this.today.toDateString()  }}</td>-->
 <!--      <td>{{evenement.dateFin.toDateString() == this.today.toDateString()  }}</td>-->
 
 
-      <td> <button (click)="deleteEvenemnt(evenement)"> Supprimer</button></td>
-      <td> <button (click)="showForm(evenement)"> Modifier</button></td>
+      <td *ngIf="roleMatch('ADMIN')"> <button (click)="deleteEvenemnt(evenement)"> Supprimer</button></td>
+      <td *ngIf="roleMatch('ADMIN')"> <button (click)="showForm(evenement)"> Modifier</button></td>
 <!--      <td> <button (click)="affecterEvenementToEtudiant(8,evenement.idEvenement)" [disabled]="evenement.placeDisponible==0"> Participer</button></td>-->
-      <td> <input class="btn btn-primary" type="submit" value="Participer" (click)="affecterEvenementToEtudiant(81,evenement.idEvenement)" [disabled]="evenement.placeDisponible==0" ></td>
-      <td> <input class="btn btn-secondary" type="submit" value="Annuler Participation" (click)="desaffecterEtudiant(81,evenement.idEvenement)" [disabled]="!evenement.hasParticipated"></td>
+      <td *ngIf="roleMatch('USER')"> <input class="btn btn-primary" type="submit" value="Participer" (click)="affecterEvenementToEtudiant(localStorage.getItem('id'),evenement.idEvenement)" [disabled]="evenement.placeDisponible==0 || evenement.hasParticipated" ></td>
+      <td *ngIf="roleMatch('USER')"> <input class="btn btn-secondary" type="submit" value="Annuler Participation" (click)="desaffecterEtudiant(localStorage.getItem('id'),evenement.idEvenement)" [disabled]="!evenement.hasParticipated"></td>
 <!--      [disabled]="this.etudiantDejaParticipe(8,evenement.idEvenement)-->
     </tr>
     </tbody>
@@ -43,7 +44,6 @@
     <app-update-evenement [eve]="evenementtoupdate" (sendmsg)="afterrecieveData($event)"></app-update-evenement>
   </div>
   <br>
-  <button class="btn btn-secondary" routerLink="/dashboard/lazy/evenement/addEvenement"> Ajouter Evenement</button>
 </div>
 
 

@@ -35,8 +35,12 @@ export class ListeEtudiantComponent implements OnInit{
     });
 
   }
-  updateEtudiant(id:any){
-    this.router.navigate(['dashboard/lazy/etudiant/updateEtudiant', id]);
+  updateEtudiant(idEtudiant:any,etudiant:any){
+   // this.router.navigate(['dashboard/lazy/etudiant/updateEtudiant', id]);
+    this.etudiantService.updateEtudiant(idEtudiant,etudiant).subscribe((data)=>{
+      console.log(data);
+      this.getAll();
+    })
   }
   affecterEvenementToEtudiant(idEtudiant:any,idEvenement:any){
     this.etudiantService.affecterEvenementToEtudiant(idEtudiant,idEvenement).subscribe((data)=>{

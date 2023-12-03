@@ -5,6 +5,7 @@ import {Evenement} from "../../model/evenement";
 import {EtudiantService} from "../../services/serviceEtudiant/etudiant.service";
 import {map, Observable,async} from "rxjs";
 import {Etudiant} from "../../model/etudiant";
+import {UserAuthService} from "../../services/user-auth/user-auth.service";
 
 @Component({
   selector: 'app-list-evenement',
@@ -14,7 +15,8 @@ import {Etudiant} from "../../model/etudiant";
 export class ListEvenementComponent implements OnInit {
   etudiant =new Etudiant;
   evenement= new Evenement;
-  constructor(private evenementService:EvenementService,private etudiantService:EtudiantService ,private router:Router){}
+  etudiantById!:any;
+  constructor(private userAuthService: UserAuthService,private evenementService:EvenementService,private etudiantService:EtudiantService ,private router:Router){}
   evenements !:any[];
   participeDeja=true;
   idEvenement!:any;
@@ -25,7 +27,7 @@ export class ListEvenementComponent implements OnInit {
   evenementtoupdate:any;
 condition=false;
 dateFinFormated!:Date;
-
+  existedeja!:any;
 
 
   ngOnInit() {
@@ -40,7 +42,6 @@ dateFinFormated!:Date;
       console.log(data);
       //  console.log(this.today.getDate());
 
-
     },
       (error)=>{
         console.log('test',error.status)
@@ -54,6 +55,12 @@ switch (error.status){
 }
       }
       );
+    this.etudiantService.getEtudiantById(Number(localStorage.getItem('id'))).subscribe(
+      (data)=>{
+        this.etudiantById=data;
+        console.log(data);
+      }
+    )
   }
   deleteEvenemnt(evenement:Evenement){
     this.evenementService.deleteEvenement(evenement).subscribe((data)=>{
@@ -167,11 +174,41 @@ getAll(){
 
   })
 }
+
+  public roleMatch(allowedRoles:any): boolean {
+    let isMatch = false;
+    const userRoles: any = this.userAuthService.getRoles();
+
+    if (userRoles != null && userRoles) {
+
+      if (userRoles == allowedRoles) {
+        isMatch = true;
+        return isMatch;
+      } else {
+        return isMatch;
+      }
+    }
+    return isMatch;
+  }
+
+  // public existeDeja(idEtudiant: any, idEvenement: any): boolean {
+  //   let existe = false;
+  //   this.etudiantService.etudiantParticipeDeja(idEtudiant, idEvenement).subscribe(
+  //     (result: boolean) => {
+  //       existe = result;
+  //     },
+  //     (error: any) => {
+  //       // Handle the error if needed
+  //     }
+  //   );
+  //   return existe;
+  // }
+
   // isEventExpired(eventDate: Date): boolean {
   //   const today = new Date();
   //   return eventDate.toJSON() > today.toJSON();
   // }
 
 
-
+  protected readonly localStorage = localStorage;
 }

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FoyerService} from "../../services/foyer.service";
 import {EvenementService} from "../../services/serviceEvenement/evenement.service";
 import {Router} from "@angular/router";
-
+declare var createGoogleEvent: any;
 @Component({
   selector: 'app-add-evenement',
   templateUrl: './add-evenement.component.html',
@@ -32,6 +32,21 @@ export class AddEvenementComponent {
          this.getAll();
           }
       )
+
+      let appointmentTime = new Date(this.addEvenementForm.value.dateDebut);
+      let appointmentEndTime = new Date(this.addEvenementForm.value.dateDebut);
+      // Convert the date to the desired format with a custom offset (e.g., -07:00)
+      const startTime = appointmentTime.toISOString().slice(0, 18) + '-07:00';
+      const endTime = appointmentEndTime.toISOString().slice(0, 18) + '-07:00';
+      const eventDetails = {
+        email: "amirlaroussi99544029@gmail.com",
+        startTime: startTime,
+        endTime: endTime,
+      };
+      console.info(eventDetails);
+      //this.generateICSFile()
+      createGoogleEvent(eventDetails);
+
     }
     this.router.navigate(['dashboard/lazy/evenement']);
   }

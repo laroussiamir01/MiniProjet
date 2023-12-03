@@ -39,7 +39,7 @@ export class UpdateEtudiantComponent implements OnInit{
     // });
     // console.log(idEtudiant);
     this.etudiantService.updateEtudiant(this.idEtudiant,this.etudiant).subscribe((data)=>{
-    this.getAll();
+   // this.getAll();
     });
     console.log(this.etudiant);
     this.router.navigate(['dashboard/lazy/etudiant']);

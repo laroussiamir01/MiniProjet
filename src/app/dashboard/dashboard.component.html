@@ -87,7 +87,7 @@
           <i class="ti ti-dashboard"></i>
         </li>
         <li class="pc-item">
-          <a href="../dashboard/index.html" class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
+          <a [routerLink]="['/dashboard']" class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
             class="pc-mtext">Dashboard</span></a>
         </li>
         <li class="pc-item pc-caption">
@@ -182,7 +182,7 @@
           <a *ngIf="roleMatch('USER')" class="pc-link"><span class="pc-micon"><i class="ti ti-walk"></i></span><span
             class="pc-mtext">Etudiant user</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
-            <li> <a class="pc-link" [routerLink]="['/dashboard/lazy/etudiant']">Liste des etudiants</a></li>
+<!--            <li> <a class="pc-link" [routerLink]="['/dashboard/lazy/etudiant']">Liste des etudiants</a></li>-->
 
           </ul>
         </li>
@@ -202,7 +202,7 @@
           <a *ngIf="roleMatch('USER')" class="pc-link"><span class="pc-micon"><i class="ti ti-access-point"></i></span><span
             class="pc-mtext">Evenement user</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
-            <li> <a class="pc-link" [routerLink]="['/dashboard/lazy/etudiant']">Liste des Evenement</a></li>
+            <li> <a class="pc-link" [routerLink]="['/dashboard/lazy/evenement']">Liste des Evenement</a></li>
 
           </ul>
         </li>

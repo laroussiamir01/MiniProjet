@@ -6,6 +6,7 @@ export class Etudiant{
     prenomEt!: string;
     cin!: number;
     ecole!: string;
+  hasParticipated!:boolean;
   email!: string;
   password!: string;
     dateNaissance!: Date;

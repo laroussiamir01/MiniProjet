@@ -35,7 +35,7 @@ export class EtudiantService {
   updateEtudiant(idEtudiant: number, etudiant:Etudiant): Observable<Etudiant> {
    // return this.http.put<Etudiant>(this.etudiantUrl+'/updateEtudiant/'+ idEtudiant, etudiant);
    // return this.http.patch<Etudiant>(this.userUrl +'/updateEtudiant1/'+ idEtudiant,etudiant,{headers:this.requestHeader,});
-    return this.http.put<Etudiant>(`http://localhost:8082/api/v1/etu/updateEtudiant/${idEtudiant}`,etudiant,this.httpOptions);
+    return this.http.patch<Etudiant>(`http://localhost:8082/api/v1/etu/updateEtudiant1/${idEtudiant}`,etudiant);
 
   }
   deleteEtudiant (etudiant: Etudiant): Observable<Etudiant> {
@@ -54,7 +54,7 @@ export class EtudiantService {
     return  this.http.put<string>(url, {});
   }
   etudiantParticipeDeja(idEtudiant: number,idEvenement:number):Observable<boolean>{
-    const url = `http://localhost:8082/etudiantParticipedeja/${idEtudiant}/${idEvenement}`;
+    const url = `http://localhost:8082/api/v1/etu/etudiantParticipedeja/${idEtudiant}/${idEvenement}`;
     //  return this.http.put<Etudiant>('http://localhost:8082/setEvenementToEtudiant/'+idEtudiant+'/'+idEvenement);
     return  this.http.get<boolean>(url);
   }

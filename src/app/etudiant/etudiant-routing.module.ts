@@ -19,7 +19,10 @@ const routes: Routes = [
      // {path:'detail/:id',component:DetailComponent},
     //  {path:'detail/:attribute/:attributeVal',component:ShowUserComponent},
       //{path:'delete/:id',component:DeleteEtudiantComponent},
-      {path:'updateEtudiant',component:UpdateEtudiantComponent},
+      {path:'updateEtudiant',component:UpdateEtudiantComponent,
+        data: {
+          authorities: ['ROLE_ADMIN','ROLE_USER']
+        }},
 
     ]},
 ];

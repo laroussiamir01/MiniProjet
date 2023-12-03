@@ -28,16 +28,21 @@ export class LoginComponent {
       .subscribe({
         next: (response:any) => {
           this.authResponse = response;
-          console.log(response.access_token);
-          console.log(response.user.role);
-          this.userAuthService.setRoles(response.user.role);
+           this.userAuthService.setRoles(response.user.role);
           this.userAuthService.setToken(response.access_token);
-          const role =response.user.role;
-            this.router.navigate(['dashboard/lazy/evenement']);
+          localStorage.setItem('id',response.user.idEtudiant);
+          localStorage.setItem('hasParticipated',response.user.hasParticipated);
+         // const role =response.user.role;
+           // this.router.navigate(['dashboard/lazy/evenement']);
 
           if (!this.authResponse.mfaEnabled) {
+            // @ts-ignore
+            if(this.userAuthService.getRoles()=="ADMIN"){
+              localStorage.setItem('token', response.access_token as string);
+              this.router.navigate(['dashboard']);
+            }else
             localStorage.setItem('token', response.access_token as string);
-            this.router.navigate(['dashboard/lazy/etudiant']);
+            this.router.navigate(['dashboard']);
           }
         }
       });

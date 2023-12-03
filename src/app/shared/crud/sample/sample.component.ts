@@ -65,6 +65,7 @@ export class SampleComponent implements OnInit {
     );
   }
 
+
   update() {
     this.service.update(this.selectedItem)
         .subscribe(
@@ -129,4 +130,32 @@ export class SampleComponent implements OnInit {
       console.log(data);
     })
   }
+  getErrorMessage(columnName: string | undefined): string {
+    if (!columnName) {
+      return ''; // or some default message
+    }
+
+    const control = this.crudForm.get(columnName);
+
+    if (!control) {
+      return ''; // or some default message
+    }
+
+    if (control.hasError('required') && (control.dirty || control.touched)) {
+      return `${columnName} is required`;
+    }
+
+    if (control.hasError('minlength') && (control.dirty || control.touched)) {
+      return `${columnName} must be at least 3 characters`;
+    }
+
+    if (control.hasError('maxlength') && (control.dirty || control.touched)) {
+      return `${columnName} cannot be more than 10 characters`;
+    }
+
+    return ''; // or some default message
+  }
+
+
+  protected readonly String = String;
 }

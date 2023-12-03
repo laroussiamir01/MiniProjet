@@ -29,14 +29,14 @@ export class ProductComponent implements OnInit {
     this.products = this.route.snapshot.data['products'];
 
     this.productForm = this.fb.group({
-      ref: ['', Validators.required],
-      quantite: '',
-      prixUnitaire: ''
+      nomProduit: ['', [Validators.required,Validators.minLength(3)]],
+      quantite: ['',[Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]],
+      prixUnitaire: ['',[Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]],
     });
 
     this.productsModel = [
-      new DataModel('id', 'ID', 'number', true, []),
-      new DataModel('ref', 'Référence', 'string', false, []),
+      new DataModel('idProduit', 'ID', 'number', true, []),
+      new DataModel('nomProduit', 'Nom Produit', 'string', false, []),
       new DataModel('quantite', 'Quantité', 'number', false, []),
       new DataModel('prixUnitaire', 'Prix Unitaire', 'number', false, [])
     ];

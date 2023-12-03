@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 import {ProductService} from "../shared/service/product.service";
+import * as QRCode from "qrcode";
 
 @Component({
   selector: 'app-product-front',
@@ -11,8 +12,7 @@ export class ProductFrontComponent implements OnInit {
   produits!: any;
   // refSearch: string='';
   reference: string='';
-
-
+  qrCodeUrl: string | null = null;
 
   constructor(
       private productService: ProductService,
@@ -24,8 +24,33 @@ export class ProductFrontComponent implements OnInit {
     this.productService.getAll().subscribe((data) => {
       this.produits = data;
       console.log(data);
+      this.generateQRCodeForProduct()
+    });
+
+  }
+
+  generateQRCodeForProduct() {
+    this.produits.forEach((produit: any) => {
+      const detailsBloc = {
+        idProduit: produit.idProduit,
+        nomProduit: produit.nomProduit,
+        quantite: produit.nomProduit,
+        prixUnitaire: produit.prixUnitaire,
+
+      };
+
+      QRCode.toDataURL(JSON.stringify(detailsBloc), (err, url) => {
+        if (!err) {
+          // Créez une propriété qrCodeUrl pour chaque bloc
+          produit.qrCodeUrl = url;
+        } else {
+          console.error('Erreur lors de la génération du QR Code:', err);
+        }
+      });
     });
   }
+
+
   searchByRef(): void {
     if (this.reference) {
       this.productService.searchByRef(this.reference).subscribe(
@@ -44,8 +69,6 @@ export class ProductFrontComponent implements OnInit {
   }private fetchReponses(): void {
     this.productService.getAll().subscribe((data) => {
       this.produits = data;
-      // this.produits.sort((a, b) => compareAsc(new Date(b.dateAjoutQ), new Date(a.dateAjoutQ)));
-
       console.log(data);
     })
   }

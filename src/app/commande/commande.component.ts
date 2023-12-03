@@ -19,6 +19,7 @@ export class CommandeComponent implements OnInit{
   commande = new Commande();
 
   commandeModel: DataModel[];
+  selectedProduitId: any;
 
   constructor(public commandeService: CommandeService, private fb: FormBuilder, private route: ActivatedRoute) {
     this.commandeForm = new FormGroup({});
@@ -29,17 +30,28 @@ export class CommandeComponent implements OnInit{
     this.commandes = this.route.snapshot.data['commandes'];
 
     this.commandeForm = this.fb.group({
-      nomCommandeur: ['', Validators.required],
-      numTel: '',
+      nomCommandeur:  ['', [Validators.required,Validators.minLength(3)]],
+      numTel:['',[Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10)]],
+
 
     });
 
+
     this.commandeModel = [
-      new DataModel('id', 'ID', 'number', true, []),
+      new DataModel('idCommande', 'ID', 'number', true, []),
       new DataModel('nomCommandeur', 'Nom Commandeur', 'string', false, []),
       new DataModel('numTel', 'Numéro téléphone', 'number', false, []),
     ];
   }
-
+   /* addCommandeAndAssignToProduct(): void {
+        this.commandeService.addCommandeAndAssignToProduct(this.commande, this.selectedProduitId)
+            .subscribe(response => {
+                console.log('Commande ajoutée :', response);
+                // Réinitialisez le formulaire ou effectuez d'autres actions nécessaires
+            }, error => {
+                console.error('Erreur lors de l\'ajout de la commande :', error);
+            });
+    }
+*/
  // protected readonly CommandeService = CommandeService;
 }

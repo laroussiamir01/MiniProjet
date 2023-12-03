@@ -23,6 +23,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "./shared/shared.module";
 import {DashboardEtudiantComponent} from "./dashboard-etudiant/dashboard-etudiant.component";
+import { AddCommandeComponent } from './commande-f/add-commande/add-commande.component';
+import { ListeCommandeComponent } from './commande-f/liste-commande/liste-commande.component';
+import { UpdateCommandeComponent } from './commande-f/update-commande/update-commande.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import {DashboardEtudiantComponent} from "./dashboard-etudiant/dashboard-etudian
     DetailUniversiteComponent,
     DashboardComponent,
     DashboardEtudiantComponent,
+    AddCommandeComponent,
+    ListeCommandeComponent,
+    UpdateCommandeComponent,
 
 
 

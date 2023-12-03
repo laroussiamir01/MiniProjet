@@ -13,11 +13,5 @@ class Produit {
 })
 export class CommandeService extends CrudService{
   override url = '/commande';
-  /*addCommandeWithProduct(commande: Commande, produit: Produit): Observable<any> {
-    const commandeProduitDTO = {
-      commande: commande,
-      produit: produit
-    };
-    return this.http.post<any>(`${environment.api_url + this.url}/commande/addWithProduct`, commandeProduitDTO);
-  }*/
+
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import {Commande} from "../commande/shared/model/commande.module";
 
 @Injectable()
 export class CrudService {
@@ -13,13 +14,15 @@ export class CrudService {
       'Content-Type': 'application/json'
     })
   }
-  constructor(private http: HttpClient){
+  constructor(protected http: HttpClient){
 
   }
   url:String ='';
 
 
-
+  getById(id: number): Observable<any> {
+    return this.http.get(environment.api_url + this.url + `/${id}`);
+  }
   add(entity :any): Observable<any>{
     return this.http.post(environment.api_url + this.url, entity);
   }
@@ -44,4 +47,10 @@ export class CrudService {
   searchByNomC(nomCommandeur: string): Observable<any> {
     return this.http.get(environment.api_url + this.url + '/searchC', {params: {nomCommandeur: nomCommandeur}});
   }
+  affecterProduitCommande(idProduct: number, idCommande: number): Observable<string> {
+
+    const url = `${environment.api_url}/commandeaffecte/${idProduct}/${idCommande}`;
+    return this.http.put<string>(url, {});
+  }
+
 }

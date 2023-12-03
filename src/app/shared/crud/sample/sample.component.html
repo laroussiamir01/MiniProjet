@@ -29,8 +29,8 @@
     <div class="card">
       <div class="card-header bg-info text-white">
         {{operation == 'add' ? 'Ajouter' :
-        operation == 'edit' ? 'Modifier' :
-          operation == 'remove' ? 'Supprimer' : ''}}
+              operation == 'edit' ? 'Modifier' :
+                      operation == 'remove' ? 'Supprimer' : ''}}
       </div>
       <div class="card-body">
         <div *ngIf="operation == 'add' || operation == 'edit'">
@@ -43,10 +43,11 @@
                 <input *ngSwitchCase="'number'" type="number" class="form-control" formControlName="{{dataModel.columnName}}"
                        [(ngModel)]="selectedItem[dataModel.columnName!]"/>
               </div>
-              <!-- <div class="alert alert-danger" *ngIf="produitForm.controls['ref'].invalid &&
-                                          (produitForm.controls['ref'].touched || produitForm.controls['ref'].dirty)">
-                  Référence est obligatoire!
-              </div> -->
+              <div *ngIf="getErrorMessage(dataModel.columnName) !== ''">
+                {{ getErrorMessage(dataModel.columnName) }}
+              </div>
+
+
             </div>
 
             <button class="btn btn-success" [disabled]="crudForm.pristine || crudForm.invalid"

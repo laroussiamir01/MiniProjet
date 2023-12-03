@@ -155,8 +155,13 @@
 
           </li>
           <li class="pc-item pc-hasmenu">
-            <a [routerLink]="['/dashboardEtudiant/commande']"class="pc-link"><span class="pc-micon"><i class="ti ti-shopping-cart"></i></span><span
+            <a [routerLink]="['/dashboardEtudiant/commandef']"class="pc-link"><span class="pc-micon"><i class="ti ti-shopping-cart"></i></span><span
               class="pc-mtext">Commande</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+            <ul class="pc-submenu">
+              <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/commandef/listCommande']">Liste des Commandes</a></li>
+              <li> <a class="pc-item" class="pc-link"  [routerLink]="['/dashboardEtudiant/commandef/addCommande']">Ajouter une commande</a></li>
+
+            </ul>
 
           </li>
           <li class="pc-item pc-hasmenu">

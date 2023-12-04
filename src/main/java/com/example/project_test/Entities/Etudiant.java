@@ -29,6 +29,7 @@ public class Etudiant implements Serializable, UserDetails {
     private String nomEt;
     private String prenomEt;
     private long cin;
+    private boolean hasParticipated;
     private String ecole;
     @Column(unique = true)
     private String email;

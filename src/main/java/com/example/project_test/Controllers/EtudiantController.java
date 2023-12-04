@@ -125,6 +125,13 @@ public class EtudiantController {
     public ResponseEntity<String> desaffecterEtudiant(@PathVariable long idEtudiant , @PathVariable long idEvenement ) {
 return etudiantService.desaffecterEtudiant(idEtudiant,idEvenement);
     }
+
+//@GetMapping("/etudiantParticipedeja/{idEtudiant}/{idEvenement}")
+//    public boolean etudiantParticipedeja(@PathVariable long idEtudiant,@PathVariable long idEvenement){
+//        return etudiantService.etudiantParticipedeja(idEtudiant,idEvenement);
+//}
+
+
 //@GetMapping("etudiantParticipedeja/{idEtudiant}/{idEvenement}")
 //    public boolean etudiantParticipedeja(@PathVariable long idEtudiant,@PathVariable long idEvenement){
 //        return etudiantService.etudiantParticipedeja(idEtudiant,idEvenement);

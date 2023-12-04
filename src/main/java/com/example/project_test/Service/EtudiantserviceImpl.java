@@ -5,23 +5,34 @@ import com.example.project_test.Entities.Evenement;
 import com.example.project_test.Entities.Reservation;
 import com.example.project_test.repository.EvenementRepository;
 import com.example.project_test.repository.ReservationRepository;
+import config.CorsConfig;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import com.example.project_test.repository.EtudiantRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class EtudiantserviceImpl implements IEtudiantService{
     EtudiantRepository etudiantRepository;
     ReservationRepository reservationRepository;
     EvenementRepository evenementRepository;
+    EvenementserviceImlpl evenementserviceImlpl;
 
     @Override
     public Etudiant addEtudiant(Etudiant etudiant) {
@@ -82,6 +93,7 @@ public class EtudiantserviceImpl implements IEtudiantService{
     public Etudiant affecterReservationToEtudiant(long idEtudiant, String idReservation) {
         Etudiant etudiant=etudiantRepository.findById(idEtudiant).orElse(null);
         Reservation reservation= reservationRepository.findById(idReservation).orElse(null);
+        assert etudiant != null;
         etudiant.getReservations().add(reservation);
 
         return etudiantRepository.save(etudiant);
@@ -94,9 +106,11 @@ public class EtudiantserviceImpl implements IEtudiantService{
 
         List<Evenement> evenementsEtudiant = evenementRepository.findByEtudiantsIdEtudiant(idEtudiant);
         if(evenement != null && evenement.getPlaceDisponible()>0 && !evenementsEtudiant.contains(evenement) ) {
+            assert etudiant != null;
             etudiant.getEvenements().add(evenement);
             evenement.setPlaceDisponible(evenement.getPlaceDisponible() - 1);
             evenement.setHasParticipated(true);
+            evenementserviceImlpl.sendEmail(etudiant,evenement);
             return etudiantRepository.save(etudiant);
         }else{
             throw new IllegalStateException("Aucune place disponible pour l'événement ou l'étudiant est déjà affecté à cet événement");
@@ -119,14 +133,15 @@ public class EtudiantserviceImpl implements IEtudiantService{
             throw new IllegalStateException("Aucune place disponible pour l'événement ou l'étudiant est déjà affecté à cet événement");
         }
     }
-    public boolean etudiantParticipedeja(long idEtudiant,long idEvenement){
-        Evenement evenement = evenementRepository.findById(idEvenement).orElse(null);
-        List<Evenement> evenementsEtudiant = evenementRepository.findByEtudiantsIdEtudiant(idEtudiant);
-        if (evenementsEtudiant.contains(evenement)){
-        return true;}
-        else
-            return false;
-    }
+//    @Override
+//    public boolean etudiantParticipedeja(long idEtudiant,long idEvenement){
+//        Evenement evenement = evenementRepository.findById(idEvenement).orElse(null);
+//        List<Evenement> evenementsEtudiant = evenementRepository.findByEtudiantsIdEtudiant(idEtudiant);
+//        if (evenementsEtudiant.contains(evenement)){
+//        return true;}
+//        else
+//            return false;
+//    }
 
 
     public ResponseEntity<String> desaffecterEtudiant(@PathVariable long idEtudiant , @PathVariable long idEvenement ) {
@@ -203,10 +218,16 @@ public class EtudiantserviceImpl implements IEtudiantService{
     @Override
     public long getTotalParticipations(Long idEtudiant) {
         Etudiant etudiant=etudiantRepository.findById(idEtudiant).orElse(null);
+        assert etudiant != null;
         return etudiant.getEvenements().size();
     }
     public Set<Evenement> ListTotalParticipations(Long idEtudiant){
         Etudiant etudiant=etudiantRepository.findById(idEtudiant).orElse(null);
+        assert etudiant != null;
         return etudiant.getEvenements();
     }
+
+
+
+
 }

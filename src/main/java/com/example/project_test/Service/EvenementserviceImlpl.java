@@ -10,6 +10,7 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -128,7 +129,70 @@ public class EvenementserviceImlpl implements IEvenementService{
         }
     }
 
+    @Async
+    public void sendEmail(Etudiant etudiant,Evenement evenement) {
+        // Sender's email information
+        String senderEmail = "amir.laroussi@esprit.tn";
+        String senderPassword = "aney avyr jedz ogti";
 
+        // Recipient's email address
+        //    String recipientEmail = "amirlaroussi99544029@gmail.com";
+
+        // Email subject
+        String subject = "New Event Added";
+
+        // Email body
+        String body = "You have participated in a new event get ready:\n\n" +
+                "Event Title: " + evenement.getTitre() + "\n" +
+                "Event Description: " + evenement.getDescription() + "\n" +
+                "Event Starting Date : " + evenement.getDateDebut() + "\n" +
+                "Event Ending Date: " + evenement.getDateFin() + "\n" +
+                "Event Space Available: " + evenement.getPlaceDisponible() + "\n";
+
+        // SMTP server configuration
+        String host = "smtp.gmail.com";
+        int port = 587;
+
+        // Create properties object for the SMTP server
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Create a session with the SMTP server
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+        try {
+            // Create a MimeMessage object
+            MimeMessage message = new MimeMessage(session);
+
+            // Set the sender address
+            message.setFrom(new InternetAddress(senderEmail));
+
+            // Set the recipient address
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(etudiant.getEmail()));
+
+            // Set the subject
+            message.setSubject(subject);
+
+            // Set the body
+            message.setText(body);
+
+            // Send the email
+            Transport.send(message);
+
+            System.out.println("Email sent successfully.");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Async
     public void sendEmailToEtudiant(List<Etudiant>etudiants, Evenement evenement) {
         // Sender's email information
         String senderEmail = "amir.laroussi@esprit.tn";

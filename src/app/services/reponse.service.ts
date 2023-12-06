@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Reponse} from "../model/reponse";
 import {Question} from "../model/question";
+import {differenceInDays, format, formatDistanceToNow} from "date-fns";
+import {fr} from "date-fns/locale";
 
 
 @Injectable({
@@ -48,6 +50,28 @@ export class ReponseService {
   dislikeReponse(id: number): Observable<any> {
     return this.http.post(`${this.reponseUrl}/${id}/dislike`, null);
   }
+
+  formatDynamicTime(dateString: Date | string): string {
+    const date = new Date(dateString);
+    const now = new Date();
+
+    // Calculate the difference in days
+    const differenceInDayss = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+    const differenceInDaysValue = differenceInDays(now, date);
+    if (differenceInDayss > 2) {
+      // If more than 2 days, format as a complete date
+      return format(date, "dd MMM yyyy", { locale: fr });
+    } else {
+      const timeAgo = formatDistanceToNow(date, { locale: fr });
+      if (differenceInDaysValue > 0) {
+        return `Il y a ${differenceInDaysValue} jours`;
+      } else {
+        return timeAgo;
+      }
+    }
+
+    }
+
 
 
 }

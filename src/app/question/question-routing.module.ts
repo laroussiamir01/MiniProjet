@@ -6,7 +6,6 @@ import {DeleteQuestionComponent} from "./delete-question/delete-question.compone
 import {UpdateQuestionComponent} from "./update-question/update-question.component";
 import {AddQuestionComponent} from "./add-question/add-question.component";
 import {ListeQuestionComponent} from "./liste-question/liste-question.component";
-import {ResolverQuestionService} from "../services/resolver-question.service";
 
 const routes: Routes = [
   {

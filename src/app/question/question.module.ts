@@ -10,6 +10,8 @@ import {DeleteQuestionComponent} from "./delete-question/delete-question.compone
 import {DetailQuestionComponent} from "./detail-question/detail-question.component";
 import {ListeQuestionComponent} from "./liste-question/liste-question.component";
 import {UpdateQuestionComponent} from "./update-question/update-question.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import {UpdateQuestionComponent} from "./update-question/update-question.compone
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatPaginatorModule,
+    MatTableModule,
   ]
 })
 export class QuestionModule { }

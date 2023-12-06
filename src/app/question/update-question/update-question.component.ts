@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuestionService} from "../../services/question.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {compareAsc} from "date-fns";
 
 @Component({
   selector: 'app-update-question',
@@ -9,24 +11,29 @@ import {QuestionService} from "../../services/question.service";
 })
 export class UpdateQuestionComponent implements OnInit{
   question !:any;
-  constructor(private questionService: QuestionService,  private ac:ActivatedRoute , private router:Router){}
-
+  editedDescription: string;
+  dateU:Date;
+  questions !:any[];
+  errorMessage: string='';
+  constructor(private questionService: QuestionService,  private ac:ActivatedRoute , private router:Router,
+              public dialogRef: MatDialogRef<UpdateQuestionComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { descriptionQuestion: string, dateAjoutQ: Date}){
+    this.editedDescription = data.descriptionQuestion;
+    this.dateU=data.dateAjoutQ;
+  }
   ngOnInit() {
-    this.ac.paramMap.subscribe((next) =>
-      this.questionService
-        .getQuestionById(Number(next.get('idQuestion')))
-        .subscribe(
-          (res) => {
-            this.question = res;
-            this.question.descriptionQuestion = res.descriptionQuestion; // Assign the value of descriptionQuestion
-          },
-          (error) => console.log(error)
-        )
-    );
+
+  }
+  saveChanges() {
+    if (!this.editedDescription) {
+      this.errorMessage = 'La description ne peut pas être vide.';
+    }
+    else {
+      this.dialogRef.close({descriptionQuestion: this.editedDescription, dateAjoutQ: new Date()});
+    }
+  }
+  cancel() {
+    this.dialogRef.close();  // Cette ligne ferme le modal sans passer de données
   }
 
-  update() {
-    this.questionService.updateQuestion(this.question.idQuestion, this.question).subscribe();
-    this.router.navigate(['/lazy/question']);
-  }
 }

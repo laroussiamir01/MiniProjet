@@ -1,17 +1,13 @@
-<p>update-question works!</p>
 
-<div class="container">
-  <h2>Modifier une reponse</h2>
-  <form (ngSubmit)="update()">
-    <div class="form-group">
-      <label for="descriptionQuestion">description</label>
-      <input type="text" id="descriptionQuestion" name="descriptionQuestion" [(ngModel)]="question.descriptionQuestion"  class="form-control">
-    </div>
+<form #editForm="ngForm">
+  <div class="form-group">
+    <label for="editedDescription">Nouvelle description</label>
+    <input type="text" id="editedDescription" [(ngModel)]="editedDescription" name="editedDescription" class="form-control" ngModel [ngModelOptions]="{ standalone: true }">
+  </div>
 
-    <button type="submit" class="btn btn-primary">Modifier</button>
-
-  </form>
-</div>
-<button class="btn btn-secondary"  routerLink="/lazy/question">Retour à la liste des questions</button>
-
-
+  <div *ngIf="errorMessage" class="text-danger">
+    {{ errorMessage }}
+  </div>
+  <button type="button" class="btn btn-primary" (click)="saveChanges()">Enregistrer</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+</form>

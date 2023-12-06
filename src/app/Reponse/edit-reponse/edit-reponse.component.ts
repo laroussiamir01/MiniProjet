@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class EditReponseComponent {
   editedDescription: string;
+  errorMessage: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<EditReponseComponent>,
@@ -18,8 +19,13 @@ export class EditReponseComponent {
   }
 
   saveChanges() {
-    // Fermez le modal et passez la nouvelle description
-    this.dialogRef.close(this.editedDescription);
+    if (!this.editedDescription) {
+      this.errorMessage = 'La description ne peut pas être vide.';
+    }
+      else
+      {
+        this.dialogRef.close(this.editedDescription);
+      }
   }
 
     cancel() {

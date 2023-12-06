@@ -3,11 +3,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ReponseService } from "../../services/reponse.service";
+import { QuestionService } from "../../services/question.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {Reponse} from "../../model/reponse";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {EditReponseComponent} from "../../Reponse/edit-reponse/edit-reponse.component";
 import {format} from "date-fns";
+import {Question} from "../../model/question";
 @Component({
     selector: 'app-detail-question',
     templateUrl: './detail-question.component.html',
@@ -23,8 +25,8 @@ export class DetailQuestionComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private router : Router,
         private reponseService: ReponseService,
+        private questionService: QuestionService,
         private formBuilder: FormBuilder,
         private dialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public data: { descriptionReponse: string, questionId: number }
@@ -50,49 +52,49 @@ export class DetailQuestionComponent implements OnInit {
       this.responses.sort((a, b) => b.like - a.like);
     });
   }
-    fetchQuestionDetails(idQuestion: number) {
-        // Fetch the question details based on the idQuestion
-        // You might want to call the questionService here to get the question details
-        // this.questionService.getQuestionById(idQuestion).subscribe(
-        //   (response) => {
-        //     this.question = response;
-        //   },
-        //   (error) => {
-        //     console.error(error);
-        //   }
-        // );
+  fetchQuestionDetails(idQuestion: number) {
+    // Fetch the question details based on the idQuestion
+    // You might want to call the questionService here to get the question details
+    // this.questionService.getQuestionById(idQuestion).subscribe(
+    //   (response) => {
+    //     this.question = response;
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
 
-        // For demonstration purposes, setting a mock question
-        this.question = { id: idQuestion, /* other properties */ };
+    // For demonstration purposes, setting a mock question
+    this.question = { id: idQuestion, /* other properties */ };
+  }
+
+  addReponse() {
+    if (this.question && this.question.id && this.addReponseForm.valid) {
+      const idQuestion = this.question.id;
+      const reponse = this.addReponseForm.value;
+
+      // Assigner la valeur à descriptionReponse
+      this.descriptionReponse = reponse.descriptionReponse;
+
+      console.log('Form Value:', reponse);
+      console.log('Description Reponse:', this.descriptionReponse);
+
+      this.reponseService.addReponse(reponse, idQuestion).subscribe((response) => {
+        console.log("Response from backend:", response);
+        console.log("ajout");
+        // Redirect or handle the success scenario
+        this.fetchReponses();
+      }, (error) => {
+        console.error("Error adding response:", error);
+      });
+
+      console.log("ID (inside if):", idQuestion);
+    } else {
+      console.log("Invalid question or id:", this.question);
+      console.log("Form not valid:", this.addReponseForm.errors); // Log form errors
+      // Handle the case where the ID is not available, show an error message, or take appropriate action
     }
-
-    addReponse() {
-        if (this.question && this.question.id && this.addReponseForm.valid) {
-            const idQuestion = this.question.id;
-            const reponse = this.addReponseForm.value;
-
-            // Assigner la valeur à descriptionReponse
-            this.descriptionReponse = reponse.descriptionReponse;
-
-            console.log('Form Value:', reponse);
-            console.log('Description Reponse:', this.descriptionReponse);
-
-            this.reponseService.addReponse(reponse, idQuestion).subscribe((response) => {
-                console.log("Response from backend:", response);
-                console.log("ajout");
-                // Redirect or handle the success scenario
-              this.fetchReponses();
-            }, (error) => {
-                console.error("Error adding response:", error);
-            });
-
-            console.log("ID (inside if):", idQuestion);
-        } else {
-            console.log("Invalid question or id:", this.question);
-            console.log("Form not valid:", this.addReponseForm.errors); // Log form errors
-            // Handle the case where the ID is not available, show an error message, or take appropriate action
-        }
-    }
+  }
 
   deleteReponse(reponse: Reponse): void {
     this.reponseService.deleteReponse(reponse).subscribe(() => {
@@ -147,5 +149,7 @@ export class DetailQuestionComponent implements OnInit {
 
     return formattedDate;
   }
-
+  formatDynamicTime(date: Date | string): string {
+    return this.reponseService.formatDynamicTime(date);
+  }
 }

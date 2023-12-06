@@ -7,7 +7,7 @@
              [class.is-invalid]="addQuestionForm.get('descriptionQuestion')?.invalid && addQuestionForm.get('descriptionQuestion')?.touched">
       <!-- Ajoute la classe 'is-invalid' si le champ est invalide et a été touché -->
       <div *ngIf="addQuestionForm.get('descriptionQuestion')?.invalid && addQuestionForm.get('descriptionQuestion')?.touched" class="invalid-feedback">
-        Le nom est requis.
+        La description ne peut pas etre vide!
       </div>
     </div>
 

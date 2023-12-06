@@ -1,17 +1,23 @@
-<div>
-  <h2>Réponses</h2>
+
+
   <div class="container">
-    <h2>Ajouter une reponse</h2>
+    <h4>Ajouter une réponse</h4>
     <form [formGroup]="addReponseForm" (ngSubmit)="addReponse()">
       <div class="form-group">
-        <label for="descriptionReponse">Description</label>
-        <input type="text" id="descriptionReponse" formControlName="descriptionReponse" class="form-control" [(ngModel)]="descriptionReponse" name="descriptionReponse">
+        <label for="descriptionReponse">Votre reponse</label>
+        <input type="text" id="descriptionReponse" formControlName="descriptionReponse" class="form-control"
+               [class.is-invalid]="addReponseForm.get('descriptionReponse')?.invalid && addReponseForm.get('descriptionReponse')?.touched" required>
+        <!-- Ajoutez l'attribut "required" pour rendre le champ obligatoire-->
+        <div *ngIf="addReponseForm.get('descriptionReponse')?.invalid && addReponseForm.get('descriptionReponse')?.touched" class="invalid-feedback">
+          La description ne peut pas être vide!
+        </div>
       </div>
 
       <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
   </div>
-</div>
+
+
 
 
 <table class="table">
@@ -23,16 +29,17 @@
   <tbody>
   <tr *ngFor="let reponse of responses">
     <td>{{ reponse.descriptionReponse }}</td>
-    <td>{{ formatDateString(reponse.dateAjoutR) }}
-  </td>
+    <td>{{ formatDynamicTime(reponse.dateAjoutR) }}</td>
 
 
     <td> <button (click)="deleteReponse(reponse)" > Supprimer</button></td>
     <td> <button (click)="editReponse(reponse)" > Modifier</button></td>
     <td> <button (click)="likeReponse(reponse.idReponse)">Like {{ reponse.like }}</button></td>
     <td><button (click)="dislikeReponse(reponse.idReponse)">Dislike {{ reponse.dislike }}</button></td>
+
   </tr>
   </tbody>
 </table>
 <button class="btn btn-secondary"  routerLink="/dashboard/lazy/question">Retour à la liste des questions</button>
+
 

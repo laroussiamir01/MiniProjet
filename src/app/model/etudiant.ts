@@ -1,3 +1,6 @@
+import {Question} from "./question";
+import {Reponse} from "./reponse";
+
 export class Etudiant{
     idEtudiant!: number ;
     nomEt!: string;
@@ -5,5 +8,7 @@ export class Etudiant{
     cin!: number;
     ecole!: string;
     dateNaissance!: Date;
-   
-    }
+
+
+
+}

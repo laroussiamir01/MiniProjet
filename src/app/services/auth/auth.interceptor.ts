@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor{
             console.log("aaaaaaaaaaaa")
             this.router.navigate(['/forbidden']);
           }
-          return throwError("Some thing is wrong");
+          return throwError("Something is wrong");
         }
       )
     );

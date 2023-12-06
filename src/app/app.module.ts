@@ -28,7 +28,18 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import {AuthInterceptor} from "./services/auth/auth.interceptor";
 import {AuthenticationService} from "./services/login/authentication.service";
 import {AuthGuard} from "./services/auth/auth.guard";
-
+import {DetailPlatComponent} from "./plat/detail-plat/detail-plat.component";
+import {AddPlatComponent} from "./plat/add-plat/add-plat.component";
+import {AddMenuComponent} from "./menu/add-menu/add-menu.component";
+import {UpdateMenuComponent} from "./menu/update-menu/update-menu.component";
+import {ListeMenuComponent} from "./menu/liste-menu/liste-menu.component";
+import {UpdatePlatComponent} from "./plat/update-plat/update-plat.component";
+import {ListePlatComponent} from "./plat/liste-plat/liste-plat.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RouterModule} from "@angular/router";
+import {MenuService} from "./services/menu.service";
+import {PlatService} from "./services/plat.service";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,15 +63,27 @@ import {AuthGuard} from "./services/auth/auth.guard";
     LoginComponent,
     RegisterComponent,
     ForbiddenComponent,
+    AddMenuComponent,
+    UpdateMenuComponent,
+    ListeMenuComponent,
+    AddPlatComponent,
+    UpdatePlatComponent,
+    ListePlatComponent,
+    DetailPlatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    //NgChartsModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
-  providers: [EtudiantService,EvenementService,HttpClient,
+  providers: [EtudiantService,EvenementService,HttpClient, MenuService, PlatService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

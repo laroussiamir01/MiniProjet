@@ -20,7 +20,7 @@ public isLoggedIn(){
 public logout(){
  // return this.auth.logout();
   this.userAuthService.clear();
-  this.router.navigate(['dashboard']);
+  this.router.navigate(['login']);
 }
 
   public roleMatch(allowedRoles:any): boolean {

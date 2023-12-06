@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FoyerService} from "../../services/foyer.service";
 import {EvenementService} from "../../services/serviceEvenement/evenement.service";
 import {Router} from "@angular/router";
@@ -13,17 +13,42 @@ export class AddEvenementComponent {
 
   addEvenementForm !: FormGroup;
   evenements!:any
+
   constructor(private evenementService: EvenementService, private formBuilder:FormBuilder,private router:Router){
     this.addEvenementForm = this.formBuilder.group(
       {
-        titre:['',Validators.required],
-        description :['', Validators.required],
+        titre:['',[Validators.required, Validators.minLength(4),Validators.maxLength(10)]],
+        description :['',[ Validators.required,Validators.minLength(4),Validators.maxLength(10)]],
         dateDebut :['', Validators.required],
-        dateFin :['', Validators.required],
-        placeDisponible:['', Validators.required]
+        dateFin :['', [Validators.required,this.dateFinValidator,this.dateDebutValidator]],
+        placeDisponible:['', [Validators.required,Validators.min(0)]]
       }
     );
   }
+
+  dateFinValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const currentDate = new Date();
+    const selectedDate = new Date(control.value);
+
+    if (selectedDate <= currentDate) {
+      return { 'invalidDate': true };
+    }
+
+    return null;
+  }
+
+  dateDebutValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const dateDebut = new Date(control.root.get('dateDebut')?.value);
+    const dateFin = new Date(control.root.get('dateFin')?.value);
+
+    if (dateDebut >= dateFin) {
+      return { 'invalidDateDebut': true };
+    }
+
+    return null;
+  }
+
+
   onSubmit(){
     if (this.addEvenementForm.valid){
       const evenement = this.addEvenementForm.value;

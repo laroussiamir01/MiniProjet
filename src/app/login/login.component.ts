@@ -29,21 +29,29 @@ export class LoginComponent {
         next: (response:any) => {
           this.authResponse = response;
            this.userAuthService.setRoles(response.user.role);
-          this.userAuthService.setToken(response.access_token);
+          this.userAuthService.setToken(response.accessToken);
           localStorage.setItem('id',response.user.idEtudiant);
           localStorage.setItem('hasParticipated',response.user.hasParticipated);
+          localStorage.setItem('token2',response.accessToken);
+          localStorage.setItem('jwtToken',response.accessToken);
          // const role =response.user.role;
            // this.router.navigate(['dashboard/lazy/evenement']);
 
           if (!this.authResponse.mfaEnabled) {
-            // @ts-ignore
-            if(this.userAuthService.getRoles()=="ADMIN"){
-              localStorage.setItem('token', response.access_token as string);
-              this.router.navigate(['dashboard']);
-            }else
-            localStorage.setItem('token', response.access_token as string);
+            localStorage.setItem('token',response.accessToken as string);
             this.router.navigate(['dashboard']);
+            // @ts-ignore
+            // if(this.userAuthService.getRoles()=="ADMIN"){
+            //   this.userAuthService.setToken(response.accessToken);
+            //   localStorage.setItem('token', response.accessToken as string);
+            //   this.router.navigate(['dashboard']);
+            // }else
+            //   this.userAuthService.setToken(response.accessToken);
+            // localStorage.setItem('token', response.accessToken as string);
+            // this.router.navigate(['dashboard']);
           }
+        //  else    this.userAuthService.setToken(response.accessToken);
+
         }
       });
   }
@@ -55,9 +63,12 @@ export class LoginComponent {
     };
     this.authService.verifyCode(verifyRequest)
       .subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.accessToken as string);
-          this.router.navigate(['dashboard/lazy/etudiant']);
+        next: (response:any) => {
+         // this.authResponse = response;
+         // this.userAuthService.setToken(response.accessToken);
+         // localStorage.setItem('token',response.accessToken as string);
+         // this.userAuthService.setToken(response.accessToken);
+          this.router.navigate(['dashboard']);
         }
       });
   }

@@ -23,7 +23,12 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {path: 'dashboard', component: DashboardComponent, children: [
   {path:'lazy',loadChildren:()=>import('../app/etudiant/etudiant.module').then((m)=>m.EtudiantModule)},
-  {path:'lazy',loadChildren:()=>import('../app/evenement/evenement.module').then((m)=>m.EvenementModule)},]},
+  {path:'lazy',loadChildren:()=>import('../app/evenement/evenement.module').then((m)=>m.EvenementModule)},
+      { path: 'menu',loadChildren:()=>
+          import('./menu/menu.module').then(m=>m.MenuModule)},
+      { path: 'plat',loadChildren:()=>
+          import('./plat/plat.module').then(m=>m.PlatModule)},
+    ]},
   {path: 'dashboardEtudiant', component: DashboardEtudiantComponent, children: [
       {path:'lazy',loadChildren:()=>import('../app/etudiant/etudiant.module').then((m)=>m.EtudiantModule)},
       {path:'lazy',loadChildren:()=>import('../app/evenement/evenement.module').then((m)=>m.EvenementModule)},]}

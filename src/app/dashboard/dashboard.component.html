@@ -149,13 +149,19 @@
           </ul>
         </li>
         <li class="pc-item pc-hasmenu">
-          <a [routerLink]="['/dashboard/foyer/listFoyer']"class="pc-link"><span class="pc-micon"><i class="ti ti-tools-kitchen-2"></i></span><span
-            class="pc-mtext">Menu/plat</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <a [routerLink]="['/dashboard/menu/listeMenu']"class="pc-link"><span class="pc-micon"><i class="ti ti-tools-kitchen-2"></i></span><span
+            class="pc-mtext">Menu</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
-            <li> <a class="pc-link" [routerLink]="['/dashboard/foyer/listFoyer']">Liste des foyers</a></li>
-            <li> <a class="pc-item" class="pc-link"  [routerLink]="['/dashboard/foyer/addFoyer']">Ajouter un foyer</a></li>
-            <li> <a  class="pc-link"  [routerLink]="['/dashboard/foyer/scene']">Simulation 3D du foyer</a></li>
-
+            <li><a class="pc-link" [routerLink]="['/dashboard/menu/listeMenu']">Liste des Menu</a></li>
+            <li> <a class="pc-item" class="pc-link"  [routerLink]="['/dashboard/menu/addMenu']">Ajouter un Menu</a></li>
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboard/plat/listePlat']"class="pc-link"><span class="pc-micon"><i class="ti ti-tools-kitchen-2"></i></span><span
+            class="pc-mtext">Plat</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li><a class="pc-link" [routerLink]="['/dashboard/plat/listePlat']">Liste des Plat</a></li>
+            <li> <a class="pc-item" class="pc-link"  [routerLink]="['/dashboard/plat/addPlat']">Ajouter un Plat</a></li>
           </ul>
         </li>
         <li class="pc-item pc-hasmenu">

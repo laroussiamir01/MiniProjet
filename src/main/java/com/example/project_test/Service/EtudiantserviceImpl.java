@@ -111,7 +111,7 @@ public class EtudiantserviceImpl implements IEtudiantService{
             evenement.setPlaceDisponible(evenement.getPlaceDisponible() - 1);
             evenement.setHasParticipated(true);
             evenementserviceImlpl.sendEmail(etudiant,evenement);
-            return etudiantRepository.save(etudiant);
+             return etudiantRepository.save(etudiant);
         }else{
             throw new IllegalStateException("Aucune place disponible pour l'événement ou l'étudiant est déjà affecté à cet événement");
         }
@@ -226,6 +226,7 @@ public class EtudiantserviceImpl implements IEtudiantService{
         assert etudiant != null;
         return etudiant.getEvenements();
     }
+
 
 
 

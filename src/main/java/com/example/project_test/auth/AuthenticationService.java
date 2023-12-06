@@ -32,6 +32,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TwoFactorAuthenticationService tfaService;
     public AuthenticationResponse register(RegisterRequest request) {
+        if (repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new BadCredentialsException("L'email existe déjà.");
+        }
         var user= Etudiant.builder()
                 .nomEt(request.getNomEt())
                 .prenomEt(request.getPrenomEt())
@@ -48,6 +51,7 @@ public class AuthenticationService {
         if (request.isMfaEnabled()){
             user.setSecret(tfaService.generateNewSecret());
         }
+
         var savedUser =repository.save(user);
         var jwtToken= jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -73,11 +77,13 @@ public class AuthenticationService {
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         if (user.isMfaEnabled()) {
-            var jwtToken1= jwtService.generateToken(user);
-            var refreshToken1 = jwtService.generateRefreshToken(user);
+            var savedUser =repository.save(user);
+            var jwtToken= jwtService.generateToken(user);
+            var refreshToken = jwtService.generateRefreshToken(user);
+            saveUserToken(savedUser, jwtToken);
             return AuthenticationResponse.builder()
-                    .accessToken(jwtToken1)
-                    .refreshToken(refreshToken1)
+                    .accessToken(jwtToken)
+                    .refreshToken(refreshToken)
                     .mfaEnabled(true)
                     .user(user)
                     .build();

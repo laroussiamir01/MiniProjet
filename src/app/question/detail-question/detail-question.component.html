@@ -1,0 +1,45 @@
+
+
+<div class="container">
+  <h4>Ajouter une réponse</h4>
+  <form [formGroup]="addReponseForm" (ngSubmit)="addReponse()">
+    <div class="form-group">
+      <label for="descriptionReponse">Votre reponse</label>
+      <input type="text" id="descriptionReponse" formControlName="descriptionReponse" placeholder="votre reponse" class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
+             [class.is-invalid]="addReponseForm.get('descriptionReponse')?.invalid && addReponseForm.get('descriptionReponse')?.touched" required>
+      <!-- Ajoutez l'attribut "required" pour rendre le champ obligatoire-->
+      <div *ngIf="addReponseForm.get('descriptionReponse')?.invalid && addReponseForm.get('descriptionReponse')?.touched" class="invalid-feedback">
+        La description ne peut pas être vide!
+      </div>
+    </div>
+
+    <!-- <button type="submit" class="btn btn-info">Ajouter</button>-->
+  </form>
+</div>
+
+
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Description de la réponse</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let reponse of responses">
+    <td>{{ reponse.descriptionReponse }}</td>
+    <td>{{ formatDynamicTime(reponse.dateAjoutR) }}</td>
+
+
+    <td> <button (click)="deleteReponse(reponse)" class="btn btn-danger" > Supprimer</button></td>
+    <td> <button (click)="editReponse(reponse)" class="btn btn-info"> Modifier</button></td>
+    <!-- <td> <button (click)="likeReponse(reponse.idReponse)">Like {{ reponse.like }}</button></td>
+     <td><button (click)="dislikeReponse(reponse.idReponse)">Dislike {{ reponse.dislike }}</button></td>-->
+
+  </tr>
+  </tbody>
+</table>
+<button class="btn btn-secondary"  routerLink="/dashboard/lazy/listeQst">Retour à la liste des questions</button>
+
+

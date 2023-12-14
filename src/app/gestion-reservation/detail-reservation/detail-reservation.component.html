@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <div *ngIf="reservation" class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Informations de la réservation</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="card-text"><strong>ID de la Réservation:</strong> {{ reservation.idReservation }}</p>
+          <p class="card-text"><strong>Année Universitaire:</strong> {{ reservation.anneeUniversite | date:'yyyy-MM-dd' }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="card-text"><strong>Est Valide:</strong> {{ reservation.estValide ? 'Oui' : 'Non' }}</p>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>

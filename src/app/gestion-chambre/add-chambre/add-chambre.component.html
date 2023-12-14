@@ -1,0 +1,46 @@
+<!-- <form [formGroup]="addCh" (ngSubmit)="onSubmit()" class="form-container">
+  <div class="form-group">
+    <label for="numeroChambre" class="form-label">Numéro de Chambre:</label>
+    <input type="number" id="numeroChambre" formControlName="numeroChambre" class="form-control"/>
+  </div>
+  <div  class="form-group">
+    <label for="typeChambre" class="form-label">Type de Chambre:</label>
+    <select id="typeChambre" formControlName="typeC" class="form-control">
+      <option *ngFor="let type of typeChambre | keyvalue" [value]="type.value">{{ type.value }}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="addCh.invalid">Ajouter Chambre</button>
+</form>
+
+ -->
+ <form [formGroup]="addCh" (ngSubmit)="onSubmit()" class="form-container">
+  <div class="form-group">
+    <label for="numeroChambre" class="form-label">Numéro de Chambre:</label>
+    <input type="number" id="numeroChambre" formControlName="numeroChambre" class="form-control"/>
+
+    <!-- Afficher le message d'erreur -->
+    <div *ngIf="addCh.get('numeroChambre')?.hasError('required') && addCh.get('numeroChambre')?.touched" class="error-message">
+      Numéro de Chambre est requis.
+    </div>
+    <div *ngIf="addCh.get('numeroChambre')?.hasError('min') && addCh.get('numeroChambre')?.touched" class="error-message">
+      Numéro de Chambre doit être supérieur ou égal à 1.
+    </div>
+    <div *ngIf="addCh.get('numeroChambre')?.hasError('invalidNumeroChambre') && addCh.get('numeroChambre')?.touched" class="error-message">
+      Numéro de Chambre doit avoir 3 chiffres ou moins.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="typeChambre" class="form-label">Type de Chambre:</label>
+    <select id="typeChambre" formControlName="typeC" class="form-control">
+      <option *ngFor="let type of typeChambre | keyvalue" [value]="type.value">{{ type.value }}</option>
+    </select>
+    <div *ngIf="addCh.get('typeC')?.hasError('required') && addCh.get('typeC')?.touched" class="error-message">
+      Type de Chambre est requis.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="addCh.invalid">Ajouter Chambre</button>
+</form>
+

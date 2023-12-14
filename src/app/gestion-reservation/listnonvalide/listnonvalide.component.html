@@ -1,0 +1,39 @@
+<div class="container mt-4">
+
+  <div class="input-group mt-2">
+    <div class="input-group-prepend">
+      <!-- <span class="input-group-text">
+        <i class="material-icons">search</i>
+      </span> -->
+    </div>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Année Universitaire</th>
+        <th>Est Valide ?</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let res of reservations">
+        <ng-container *ngIf="!res.estValide">
+          <td>{{ res.idReservation }}</td>
+          <td>{{ res.anneeUniversite | date:'yyyy-MM-dd' }}</td>
+          <td>
+            <span class="badge badge-info" style="color: black;">{{ res.estValide ? 'Oui' : 'Non' }}</span>
+          </td>
+
+
+           <td> <button class="btn btn-primary btn-sm action-button" (click)="approuverReservation(res.idReservation)">
+              <i class="fas fa-info-circle"></i> approuver
+            </button></td>
+
+
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

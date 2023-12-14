@@ -1,0 +1,57 @@
+#chambreCarousel {
+  .carousel-inner {
+    .carousel-item {
+      transition: transform 0.5s ease-in-out;
+
+      .card {
+        width: 100%;
+        height: 100%;
+        border: none;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        background-color: #f8f9fa; /* Background color for the card */
+
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+
+          h5, p {
+            color: #495057; /* Text color */
+            margin-bottom: 5px; /* Add some spacing between title and text */
+          }
+
+          button {
+            margin-top: 10px;
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            padding: 8px 16px; /* Increase padding for a more comfortable touch */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+
+            &:hover {
+              background-color: #0056b3; /* Hover background color */
+            }
+          }
+        }
+      }
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+      background-color: #007bff; /* Arrow background color */
+      color: #fff; /* Arrow color */
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 18px; /* Adjust the arrow size */
+      transition: background-color 0.3s ease; /* Smooth transition on hover */
+
+      &:hover {
+        background-color: #0056b3; /* Hover background color */
+      }
+    }
+  }
+}

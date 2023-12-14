@@ -1,0 +1,45 @@
+<div class="plat-detail-container">
+    <div class="plat-info">
+      <div class="plat-details">
+        <h1>Détails du plat</h1>
+        <p><strong>Nom :</strong> {{ plat?.name }}</p>
+        <p><strong>Description :</strong> {{ plat?.description }}</p>
+        <p><strong>Prix :</strong> {{ plat?.price }}</p>
+        <p><strong>Catégorie :</strong> {{ plat?.category }}</p>
+        <p>
+          <strong>Menu :</strong>
+          {{ plat?.menu?.name ? plat?.menu?.name : 'Aucun menu n\'est affecté.' }}
+        </p>
+  
+        <div class="menu-selection">
+          <label for="menu">Sélectionner un menu:</label>
+          <select id="menu" (ngModel)="selectedMenu">
+            <option value="" disabled selected>Sélectionner un menu</option>
+            </select>
+          <button (click)="affecterMenu()">Affecter</button>
+        </div>
+  
+        <button (click)="desaffecterMenu()">Désaffecter</button>
+  
+        </div>
+    </div>
+  </div>
+  
+  <style>
+    /* Styles pour la sélection du plat */
+    .plat-detail-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+  
+    .plat-details {
+      font-size: 16px;
+    }
+  
+    .menu-selection {
+      margin-top: 10px;
+    }
+  </style>

@@ -1,0 +1,43 @@
+<form (ngSubmit)="sendDataToParent()">
+  <div class="form-group">
+    <label for="idEvenement">ID</label>
+    <div class="form-group">
+      <input type="text" id="idEvenement" name="idEvenement" [(ngModel)]="eve.idEvenement" [disabled]="true" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="titre">titre</label>
+    <div class="form-group">
+      <input type="text" id="titre" name="titre" [(ngModel)]="eve.titre"  class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">description</label>
+    <div class="form-group">
+      <input type="text" id="description" name="description" [(ngModel)]="eve.description"  class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dateDebut">dateDebut</label>
+    <div class="form-group">
+      <input type="date" id="dateDebut" name="dateDebut" [(ngModel)]="eve.dateDebut"  class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="dateFin">dateFin</label>
+    <div class="form-group">
+      <input type="date" id="dateFin" name="dateFin" [(ngModel)]="eve.dateFin"  class="form-control">
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="placeDisponible">place Disponible</label>
+    <div class="form-group">
+      <input type="number" id="placeDisponible" name="placeDisponible" [(ngModel)]="eve.placeDisponible"  class="form-control">
+    </div>
+    <button type="submit" > save</button>
+  </div>
+
+</form>

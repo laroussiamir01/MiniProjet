@@ -1,0 +1,21 @@
+<ng-container *ngIf="data; else loading">
+  <h3>{{title}}</h3>
+
+  <div class="container" [ngStyle]="{'margin-top': '20px'}">
+    <div *ngIf="crudType == 'sample'">
+      <app-sample
+        [title]="title"
+        [data]="data"
+        [service]="service"
+        [initItem]="initItem"
+        [initForm]="initForm"
+        [dataModelList]="dataModelList"
+      ></app-sample>
+    </div>
+
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  Loading ....
+</ng-template>

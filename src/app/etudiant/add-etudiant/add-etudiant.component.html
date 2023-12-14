@@ -1,0 +1,32 @@
+
+<div class="container">
+  <h2>Ajouter un Etudiant</h2>
+  <form [formGroup]="addEtudiantForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nomEt">nom</label>
+      <input type="text" id="nomEt" formControlName="nomEt" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="prenomEt">prenom</label>
+      <input type="text" id="prenomEt" formControlName="prenomEt" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="cin">cin</label>
+      <input type="number" id="cin" formControlName="cin" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="ecole">ecole</label>
+      <input type="text" id="ecole" formControlName="ecole" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="dateNaissance">dateNaissance</label>
+      <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control">
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>

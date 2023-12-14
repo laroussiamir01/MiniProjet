@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Blocs</title>
+
+  <style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .container {
+    margin-top: 20px;
+  }
+  
+  .form-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #495057;
+  }
+  
+  select, button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: #f8f9fa;
+  }
+  
+  table th {
+    background-color: #A9A9A9;
+    color: #fff;
+  }
+  
+  table button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  table button:hover {
+    background-color: #0056b3;
+  }
+  
+  h1 {
+    color: #36454F;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<div>
+    <label for="menu">Sélectionnez un menu:</label>
+    <select [(ngModel)]="selectedMenuId" name="menu">
+      <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.name }}</option>
+    </select>
+  
+    <label for="plat">Sélectionnez un plat:</label>
+    <select [(ngModel)]="selectedPlatId" name="plat">
+      <option *ngFor="let plat of plats" [value]="plat.id">{{ plat.name }}</option>
+    </select>
+  
+    <button (click)="affecterPlat()">Affecter Plat</button>
+    <button (click)="desaffecterPlat()">Désaffecter Plat</button>
+  </div>
+</body>
+</html>
+  

@@ -1,0 +1,54 @@
+<div class="container">
+  <h2>Ajouter un evenement</h2>
+  <form [formGroup]="addEvenementForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="titre">titre</label>
+      <input type="text" id="titre" formControlName="titre" class="form-control">
+      <div *ngIf="addEvenementForm.get('titre')?.invalid && (addEvenementForm.get('titre')?.dirty || addEvenementForm.get('titre')?.touched)">
+        <div *ngIf="addEvenementForm.get('titre')?.hasError('required')">Le titre est requis.</div>
+        <div *ngIf="addEvenementForm.get('titre')?.hasError('minlength')">Le titre doit comporter au moins 4 caractères.</div>
+        <div *ngIf="addEvenementForm.get('titre')?.hasError('maxlength')">Le titre ne peut pas dépasser 10 caractères.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">description</label>
+      <input type="text" id="description" formControlName="description" class="form-control">
+      <div *ngIf="addEvenementForm.get('description')?.invalid && (addEvenementForm.get('description')?.dirty || addEvenementForm.get('description')?.touched)">
+        <div *ngIf="addEvenementForm.get('description')?.hasError('required')">La description est requise.</div>
+        <div *ngIf="addEvenementForm.get('description')?.hasError('minlength')">La description doit comporter au moins 4 caractères.</div>
+        <div *ngIf="addEvenementForm.get('description')?.hasError('maxlength')">La description ne peut pas dépasser 10 caractères.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateDebut">dateDebut</label>
+      <input type="date" id="dateDebut" formControlName="dateDebut" class="form-control">
+      <div *ngIf="addEvenementForm.get('dateDebut')?.invalid && (addEvenementForm.get('dateDebut')?.dirty || addEvenementForm.get('dateDebut')?.touched)">
+        <div *ngIf="addEvenementForm.get('dateDebut')?.hasError('required')">La date de début est requise.</div>
+<!--        <div *ngIf="addEvenementForm.get('dateDebut')?.hasError('invalidDateDebut')">La date de début doit être inférieure à la date de fin.</div>-->
+        <div *ngIf="addEvenementForm.get('dateDebut')?.hasError('invalidToday')">La date de début ne doit pas être depassee.</div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateFin">dateFin</label>
+      <input type="date" id="dateFin" formControlName="dateFin" class="form-control">
+      <div *ngIf="addEvenementForm.get('dateFin')?.invalid && (addEvenementForm.get('dateFin')?.dirty || addEvenementForm.get('dateFin')?.touched)">
+        <div *ngIf="addEvenementForm.get('dateFin')?.hasError('required')">La date de fin est requise.</div>
+        <div *ngIf="addEvenementForm.get('dateFin')?.hasError('invalidDate')">La date de fin doit être supérieure à la date d'aujourd'hui.</div>
+        <div *ngIf="addEvenementForm.get('dateDebut')?.hasError('invalidDateDebut')">La date de début doit être inférieure à la date de fin.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="placeDisponible">place Disponible</label>
+      <input type="number" id="placeDisponible" formControlName="placeDisponible" class="form-control">
+      <div *ngIf="addEvenementForm.get('placeDisponible')?.invalid && (addEvenementForm.get('placeDisponible')?.dirty || addEvenementForm.get('placeDisponible')?.touched)">
+        <div *ngIf="addEvenementForm.get('placeDisponible')?.hasError('required')">Le nombre de places disponibles est requis.</div>
+        <div *ngIf="addEvenementForm.get('placeDisponible')?.hasError('min')">Le nombre de places disponibles doit être supérieur ou égal à 0.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <br>
+    <button class="btn btn-secondary" routerLink="dashboard/lazy/evenement/addEvenement"> List Evenement</button>
+  </form>
+</div>

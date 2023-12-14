@@ -1,0 +1,53 @@
+<!-- Autres éléments HTML de votre composant -->
+
+<div class="user-detail-container">
+    <!-- Détails du bloc -->
+    <div class="user-info">
+      <div class="user-details">
+        <h1> details du bloc</h1>
+        <p><strong>nom:</strong> {{ bloc?.nomBloc }}</p>
+        <p><strong>capacité:</strong> {{ bloc?.capaciteBloc }}</p>
+        <p>
+          <strong>foyer:</strong>
+          {{ bloc?.foyer?.nomFoyer ? bloc?.foyer?.nomFoyer : 'Aucun foyer n\'est affecté.' }}
+        </p>
+        <!-- Autres informations détaillées ici -->
+      </div>
+    </div>
+  
+  
+  <style>
+  
+   /* Styles pour la sélection du foyer */
+   .user-detail-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .user-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .user-details {
+    font-size: 16px;
+  }
+  
+  
+  </style>  
+    

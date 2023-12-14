@@ -1,0 +1,34 @@
+<!-- stat-reservation.component.html -->
+<div class="container-fluid">
+  <div class="row clearfix">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+      <div class="card widget_2 big_icon ">
+        <div class="body">
+          <h6>Réservations Validées</h6>
+          <i class="icon fa fa-check-circle"></i>
+          <h2>{{ countValidReservations }}</h2>
+          <small>Statistiques des réservations validées</small>
+          <div class="progress" (mouseover)="showPercentage($event)" (mouseout)="hidePercentage()">
+            <div class="progress-bar valid-bar" role="progressbar" [style.width]="(countValidReservations / (countValidReservations + countInvalidReservations)) * 100 + '%'"></div>
+            <span class="progress-percentage dark-text" *ngIf="showPercentageValue">{{ percentageValue }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-12">
+      <div class="card widget_2 big_icon ">
+        <div class="body">
+          <h6>Réservations Non Validées</h6>
+          <i class="icon fa fa-times-circle"></i>
+          <h2>{{ countInvalidReservations }}</h2>
+          <small>Statistiques des réservations non validées</small>
+          <div class="progress" (mouseover)="showPercentage($event)" (mouseout)="hidePercentage()">
+            <div class="progress-bar invalid-bar" role="progressbar" [style.width]="(countInvalidReservations / (countValidReservations + countInvalidReservations)) * 100 + '%'"></div>
+            <span class="progress-percentage dark-text" *ngIf="showPercentageValue">{{ percentageValue }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<form (ngSubmit)="update()">
+  <div class="form-group">
+    <label for="id">ID</label>
+    <div class="form-group">
+      <input type="text" id="id" name="id" [(ngModel)]="ch.idChambre" [disabled]="true" class="form-control">
+    </div>
+      </div>
+  <div class="form-group">
+    <label for="description">Numero chambre:</label>
+    <input type="text" id="description" name="description" [(ngModel)]="ch.numeroChambre" class="form-control">
+
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+
+  </div>
+</form>
+<div class="mt-4">
+  <label for="selectedblocs" class="form-label">Sélectionner un bloc :</label>
+  <select id="selectedblocs" [(ngModel)]="selectedblocs" name="selectedblocs" class="form-select" required>
+    <option value="" disabled selected>Choisissez une chambre</option>
+    <option *ngFor="let b of blocs" [value]="b.idBloc">{{ b?.idBloc }}</option>
+  </select>
+  <div *ngIf="!selectedblocs" class="text-danger mt-2">
+    Veuillez choisir un bloc.
+  </div>
+</div>
+
+
+
+<div class="text-center mt-3">
+  <button class="btn btn-success" (click)="affecterChambreAbloc()">Affecter à la chambre</button>
+  <button class="btn btn-danger" (click)="desaffecterChambredeBloc()">Désaffecter de la chambre</button>
+</div>
+
+
+
+
+
+
+

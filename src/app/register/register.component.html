@@ -1,0 +1,109 @@
+<div class="container" *ngIf="!authResponse.mfaEnabled" >
+  <div class="success-message-panel" *ngIf="message">
+    <div class="success-icon">&#10004;</div>
+    <div class="success-message">{{message}}</div>
+  </div>
+
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+    <div class="form-group">
+      <label for="firstname">Nom</label>
+      <input type="text" id="firstname" formControlName="firstname" class="form-control">
+      <div *ngIf="registerForm.get('firstname')?.invalid && (registerForm.get('firstname')?.dirty || registerForm.get('firstname')?.touched)">
+        <div *ngIf="registerForm.get('firstname')?.hasError('required')">Le nom est requis.</div>
+        <div *ngIf="registerForm.get('firstname')?.hasError('minlength')">Le nom doit comporter au moins 4 caractères.</div>
+        <div *ngIf="registerForm.get('firstname')?.hasError('maxlength')">Le titre ne peut pas dépasser 15 caractères.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastname">Prenom</label>
+      <input type="text" id="lastname" formControlName="lastname" class="form-control">
+      <div *ngIf="registerForm.get('lastname')?.invalid && (registerForm.get('lastname')?.dirty || registerForm.get('lastname')?.touched)">
+        <div *ngIf="registerForm.get('lastname')?.hasError('required')">Le prenom est requise.</div>
+        <div *ngIf="registerForm.get('lastname')?.hasError('minlength')">Le prenom doit comporter au moins 3 caractères.</div>
+        <div *ngIf="registerForm.get('lastname')?.hasError('maxlength')">Le prenom ne peut pas dépasser 15 caractères.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cin">cin</label>
+      <input type="number" id="cin" formControlName="cin" class="form-control">
+      <div *ngIf="registerForm.get('cin')?.invalid && (registerForm.get('cin')?.dirty || registerForm.get('cin')?.touched)">
+        <div *ngIf="registerForm.get('cin')?.hasError('required')">La cin est requise.</div>
+        <div *ngIf="registerForm.get('cin')?.hasError('pattern')">La cin doit contenir exactement 8 chiffres.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ecole">ecole</label>
+      <input type="text" id="ecole" formControlName="ecole" class="form-control">
+      <div *ngIf="registerForm.get('ecole')?.invalid && (registerForm.get('ecole')?.dirty || registerForm.get('ecole')?.touched)">
+        <div *ngIf="registerForm.get('ecole')?.hasError('required')">L'ecole est requise.</div>
+        <div *ngIf="registerForm.get('ecole')?.hasError('minlength')">L'ecole doit comporter au moins 3 caractères.</div>
+        <div *ngIf="registerForm.get('ecole')?.hasError('maxlength')">L'ecole ne peut pas dépasser 15 caractères.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateNaissance">dateNaissance</label>
+      <input type="date" id="dateNaissance" formControlName="dateNaissance" class="form-control">
+      <div *ngIf="registerForm.get('dateNaissance')?.invalid && (registerForm.get('dateNaissance')?.dirty || registerForm.get('dateNaissance')?.touched)">
+        <div *ngIf="registerForm.get('dateNaissance')?.hasError('required')">La date de naissance est requise.</div>
+        <div *ngIf="registerForm.get('dateNaissance')?.hasError('invalidDate')">La date de naissance doit être inférieure à la date d'aujourd'hui.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email" class="form-control">
+      <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+        <div *ngIf="registerForm.get('email')?.hasError('required')">L'email est requise.</div>
+        <div *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" class="form-control">
+      <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+        <div *ngIf="registerForm.get('password')?.hasError('required')">Le mot de passe est requise.</div>
+        <div *ngIf="registerForm.get('password')?.hasError('pattern')">Le mot de passe doit contenir au moins une lettre majuscule,
+          une lettre minuscule,
+          un chiffre,
+          un caractère spécial,
+          et de longeur 8.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input id="rememberMe" formControlName="rememberMe" type="checkbox" class="form-control">
+      <label for="rememberMe">Enable 2FA (Two Factors Authentication)</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <br>
+    <button class="btn btn-secondary" routerLink="Login"> Login</button>
+  </form>
+</div>
+<div class="container" *ngIf="authResponse.mfaEnabled">
+
+  <div class="success-message-panel" *ngIf="message">
+    <div class="success-icon">&#10004;</div>
+    <div class="success-message">{{message}}</div>
+  </div>
+
+  <h2>Set Up Two-Factor Authentication</h2>
+  <div class="qr-code">
+    <img [src]="authResponse.secretImageUri" alt="QR Code">
+  </div>
+  <div class="form-group">
+    <label for="validationCode">Enter 6 digits Validation Code Generated by the app</label>
+    <input
+      type="text"
+      id="validationCode"
+      name="validationCode"
+      required
+      [(ngModel)]="otpCode"
+    >
+  </div>
+  <button
+    type="button"
+    (click)="verifyTfa()"
+    [class.button-disabled]="otpCode.length < 6"
+  >Verify code</button>
+</div>
+

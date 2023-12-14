@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Ajouter une Question</h2>
+  <form [formGroup]="addQuestionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="descriptionQuestion">Nom</label>
+      <input type="text" id="descriptionQuestion" formControlName="descriptionQuestion" class="form-control"
+             [class.is-invalid]="addQuestionForm.get('descriptionQuestion')?.invalid && addQuestionForm.get('descriptionQuestion')?.touched">
+      <!-- Ajoute la classe 'is-invalid' si le champ est invalide et a été touché -->
+      <div *ngIf="addQuestionForm.get('descriptionQuestion')?.invalid && addQuestionForm.get('descriptionQuestion')?.touched" class="invalid-feedback">
+        La description ne peut pas etre vide!
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>
+<button class="btn btn-secondary" routerLink="/dashboard/lazy/question">Retour à la liste des questions</button>

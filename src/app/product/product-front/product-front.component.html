@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Produits</title>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 20px auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+      background-color: #f8f9fa; /* Pastel background color */
+    }
+
+    table th {
+      background-color: #A9A9A9; /* Pastel header background color */
+      color: #fff;
+    }
+
+    table button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    table button:hover {
+      background-color: #0056b3;
+    }
+
+    h1 {
+      color: #36454F; /* Light blue text color */
+      text-align: center; /* Center the heading */
+      font-size: 2em; /* Adjust the font size as needed */
+      margin-bottom: 20px; /* Add space below the heading */
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+    <!-- <div class="input-group mt-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="material-icons">search</i>
+        </span>
+      </div>
+      <input [(ngModel)]="searchTerm" placeholder="Rechercher des foyers" class="form-control">
+    </div> -->
+
+    <h1>Liste des Produits</h1>
+  <input type="text" [(ngModel)]="reference" (ngModelChange)="searchByRef()" />
+    <table>
+        <thead>
+        <tr>
+            <th>Nom Produit</th>
+            <th>Quantite</th>
+            <th>Prix</th>
+            <th>Qr Code</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let produit of produits">
+            <td>{{ produit?.nomProduit }}</td>
+            <td>{{ produit?.quantite }}</td>
+            <td>{{ produit?.prixUnitaire }}</td>
+            <td>
+                  <img [src]="produit.qrCodeUrl" alt="QR Code for {{ produit.nomProduit }}">
+                </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+  <canvas #myChart width="5" height="2.5"></canvas>
+
+</div>
+</body>
+
+</html>
+

@@ -1,0 +1,53 @@
+<div class="user-detail-container">
+
+  <div class="user-info">
+    <div class="user-details">
+      <h1> details d'etudiant</h1>
+      <p><strong>nom:</strong> {{ etudiant.nomEt}}</p>
+      <p><strong>prenom:</strong> {{ etudiant.prenomEt }}</p>
+      <p><strong>cin:</strong> {{ etudiant.cin }}</p>
+      <p><strong>ecole:</strong> {{ etudiant.ecole }}</p>
+      <p><strong>email:</strong> {{ etudiant.email }}</p>
+      <p><strong>date de Naissance:</strong> {{ etudiant.dateNaissance }}</p>
+
+
+      <!-- Ajoutez d'autres informations détaillées ici -->
+    </div>
+  </div>
+</div>
+<style>
+
+  /* styles.css (ou votre fichier CSS dédié) */
+
+  .user-detail-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .user-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  .user-details {
+    font-size: 16px;
+  }
+
+  /* Styles supplémentaires si nécessaire */
+
+</style>

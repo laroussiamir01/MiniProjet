@@ -1,0 +1,201 @@
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="m-header">
+    <a href="index.html" class="b-brand">
+      <!-- ========   change your logo hear   ============ -->
+      <img src="../assets/images/logo-dark.svg" alt="" class="logo logo-lg" />
+    </a>
+    <!-- ======= Menu collapse Icon ===== -->
+    <!-- <div class="pc-h-item">
+      <a [routerLink]="['/dashboard']"class="pc-head-link head-link-secondary m-0" id="sidebar-hide">
+        <i class="ti ti-menu-2"></i>
+      </a>
+    </div> -->
+  </div>
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+
+        <li class="dropdown pc-h-item header-user-profile">
+          <a class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+             role="button" aria-haspopup="false" aria-expanded="false">
+            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
+            <span>
+            <i class="ti ti-settings"></i>
+          </span>
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-header">
+              <h4>Good Morning, <span class="small text-muted"> {{name()}}</span></h4>
+              <p class="text-muted">Project Admin</p>
+
+              <hr />
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 280px)">
+
+                <hr />
+
+                <hr />
+                <a *ngIf="isLoggedIn()" [routerLink]="['/change']"  class="dropdown-item">
+                  <i class="ti ti-settings"></i>
+                  <span>Change Password</span>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <i class="ti ti-user"></i>
+                  <span>Social Profile</span>
+                </a>
+                <a *ngIf="!isLoggedIn()" [routerLink]="['/login']" class="dropdown-item">
+                  <i class="ti ti-login"></i>
+                  <span>Login</span>
+                </a>
+                <a *ngIf="!isLoggedIn()" [routerLink]="['/register']" class="dropdown-item">
+                  <i class="ti ti-registered"></i>
+                  <span>Register</span>
+                </a>
+                <a *ngIf="isLoggedIn()" (click)="logout()" class="dropdown-item">
+                  <i class="ti ti-logout"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div> </div>
+</header>
+<!-- [ Header ] end -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="index.html" class="b-brand">
+        <!-- ========   Change your logo from here   ============ -->
+        <img src="../assets/images/logo-dark.svg" alt="" class="logo logo-lg" />
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Dashboard</label>
+          <i class="ti ti-dashboard"></i>
+        </li>
+        <li class="pc-item">
+          <a [routerLink]="['/dashboardEtudiant'] "class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
+            class="pc-mtext">Dashboard</span></a>
+        </li>
+        <li class="pc-item pc-caption">
+          <label>Pages</label>
+          <i class="ti ti-news"></i>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/foyer/listFoyerEtudiant']"class="pc-link"><span class="pc-micon"><i class="ti ti-building-community"></i></span><span
+            class="pc-mtext">Foyer</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/foyer/listFoyerEtudiant']">Liste des foyers</a></li>
+
+            <li> <a  class="pc-link"  [routerLink]="['/dashboardEtudiant/foyer/scene']">Simulation 3D du foyer</a></li>
+
+          </ul>
+        </li>
+
+
+
+
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/bloc/listBlocEtudiant']"class="pc-link"><span class="pc-micon"><i class="ti ti-building-arch"></i></span><span
+            class="pc-mtext">Bloc</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/bloc/listBlocEtudiant']">Liste des Blocs</a></li>
+
+
+
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/gestion-chambre/chclient']"class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
+              class="pc-mtext">Chambre</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+              <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/gestion-chambre/chclient']">Liste des chambres</a></li>
+
+
+          </ul>
+        </li>
+
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/lazy/listQst']"class="pc-link"><span class="pc-micon"><i class="ti ti-message-dots"></i></span><span
+            class="pc-mtext">Forum</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/lazy/listeQst']">Liste des questions</a></li>
+
+
+
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/menu/liste-menu-etudiant']"class="pc-link"><span class="pc-micon"><i class="ti ti-tools-kitchen-2"></i></span><span
+            class="pc-mtext">Menu</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/menu/liste-menu-etudiant']">Menu Pour Etudiant</a></li>
+
+
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/product']"class="pc-link"><span class="pc-micon"><i class="ti ti-sitemap"></i></span><span
+            class="pc-mtext">Produit</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a [routerLink]="['/dashboardEtudiant/commandef']"class="pc-link"><span class="pc-micon"><i class="ti ti-shopping-cart"></i></span><span
+            class="pc-mtext">Commande</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/commandef/listCommande']">Liste des Commandes</a></li>
+            <li> <a class="pc-item" class="pc-link"  [routerLink]="['/dashboardEtudiant/commandef/addCommande']">Ajouter une commande</a></li>
+
+          </ul>
+
+        </li>
+
+
+        <li class="pc-item pc-hasmenu">
+          <a class="pc-link"><span class="pc-micon"><i class="ti ti-access-point"></i></span><span
+                  class="pc-mtext">Evenement user</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <ul class="pc-submenu">
+            <li> <a class="pc-link" [routerLink]="['/dashboardEtudiant/lazy/evenement']">Liste des Evenement</a></li>
+
+          </ul>
+        </li>
+
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+
+
+
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="pc-content">
+    <!-- [ Main Content ] start -->
+    <div class="row">
+      <!-- [ sample-page ] start -->
+
+      <router-outlet></router-outlet>
+
+      <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+  </div>
+</div>
+
+

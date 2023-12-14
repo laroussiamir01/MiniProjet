@@ -1,0 +1,67 @@
+<!-- Forme d'édition -->
+<form (ngSubmit)="updateReservation()" class="needs-validation" novalidate>
+  <div class="form-group">
+    <label for="idReservation">ID de la Réservation</label>
+    <input type="text" id="idReservation" name="idReservation" [(ngModel)]="reservation.idReservation" [disabled]="true" class="form-control" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="anneeUniversite">Année Universitaire</label>
+    <input type="Localedate" id="anneeUniversite" name="anneeUniversite" [(ngModel)]="reservation.anneeUniversite" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <div class="form-group custom-label-container">
+      <label [ngClass]="{'valid-color': reservation.estValide === 'true', 'invalid-color': reservation.estValide === 'false'}" style="font-weight: bold;">
+        Est Valide : {{ reservation.estValide }}
+      </label>
+    </div>
+
+    NB: si vous voulez changez
+
+    <div class="form-check">
+      <input type="radio" id="estValideOui" name="estValide" value="true" [(ngModel)]="reservation.estValide" class="form-check-input">
+      <label for="estValideOui" class="form-check-label" [ngClass]="{'valid-color': reservation.estValide === 'true', 'invalid-color': reservation.estValide === 'false'}">Oui</label>
+    </div>
+    <div class="form-check">
+      <input type="radio" id="estValideNon" name="estValide" value="false" [(ngModel)]="reservation.estValide" class="form-check-input">
+      <label for="estValideNon" class="form-check-label" [ngClass]="{'valid-color': reservation.estValide === 'true', 'invalid-color': reservation.estValide === 'false'}">Non</label>
+    </div>
+  </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary">Sauvegarder</button>
+</form>
+
+<!-- Espacement -->
+<div class="mt-5"></div>
+
+<!-- Section d'affectation -->
+<!-- <div class="mt-4">
+  <label for="selectedchambres">Sélectionner une chambre :</label>
+  <select id="selectedchambres" [(ngModel)]="selectedchambres" class="form-control">
+    <option *ngFor="let ch of chambres" [value]="ch.idChambre">{{ ch?.numeroChambre }}</option>
+  </select>
+</div> -->
+<div class="mt-4">
+  <label for="selectedchambres" class="form-label">Sélectionner une chambre :</label>
+  <select id="selectedchambres" [(ngModel)]="selectedchambres" name="selectedchambres" class="form-select" required>
+    <option value="" disabled selected>Choisissez une chambre</option>
+    <option *ngFor="let ch of chambres" [value]="ch.idChambre">{{ ch?.numeroChambre }}</option>
+  </select>
+  <div *ngIf="!selectedchambres" class="text-danger mt-2">
+    Veuillez choisir une chambre.
+  </div>
+</div>
+
+
+
+<div class="text-center mt-3">
+  <button class="btn btn-success" (click)="affecterReservationAChambre()">Affecter à la chambre</button>
+  <button class="btn btn-danger" (click)="desaffecterReservationDeChambre()">Désaffecter de la chambre</button>
+</div>
+
+
+
